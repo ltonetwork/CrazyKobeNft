@@ -36,6 +36,6 @@ export class KobeCardComponent {
     const signer = this.provider.getSigner();
     const address = await signer.getAddress();
     const contract = new ethers.Contract(contractAddress, identityABI, this.provider);
-    return contract.isKnown(address)
+    return contract['isKnown'](address)
   }
 }
