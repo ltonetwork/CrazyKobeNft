@@ -9,12 +9,17 @@ import {MatCardModule} from "@angular/material/card";
 import {MatButtonModule} from "@angular/material/button";
 import { TitleComponent } from './components/title-component/title.component';
 import { KobeCardComponent } from './components/kobe-card/kobe-card.component';
+import { MintDialogComponent } from './components/mint-dialog/mint-dialog.component';
+import {MatDialog, MatDialogModule} from "@angular/material/dialog";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 @NgModule({
   declarations: [
     AppComponent,
     TitleComponent,
-    KobeCardComponent
+    KobeCardComponent,
+    MintDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +27,10 @@ import { KobeCardComponent } from './components/kobe-card/kobe-card.component';
     BrowserAnimationsModule,
     MatSliderModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule,
+    MatProgressSpinnerModule,
+    MatTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]
