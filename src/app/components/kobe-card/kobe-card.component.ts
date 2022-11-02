@@ -41,7 +41,7 @@ export class KobeCardComponent {
     await window.ethereum.send('eth_requestAccounts');
     this.provider = new ethers.providers.Web3Provider(window.ethereum, "any");// any needed to allow network changes
     this.isAddressKnown().then(async resp => {
-        if (resp) {
+        if (resp == true) {
 
           this.matDialog.open(MintDialogComponent, {
             height: '400px',
@@ -71,6 +71,13 @@ export class KobeCardComponent {
     const signer = this.provider.getSigner();
     const address = await signer.getAddress();
     const contract = new ethers.Contract(contractAddress, identityABI, this.provider);
-    return contract['isKnown'](address)
+    //return contract.isKnown(address)
+    return contract['isKnown'](address).then((resp: boolean) => {
+      return resp;
+    } ).
+    catch((error: any) => {
+      console.log(error);
+      return false;
+    })
   }
 }
