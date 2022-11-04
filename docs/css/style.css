@@ -1,4 +1,5 @@
 @charset "utf-8";
+
 /*
 /*	Copyright (c) 2022 Frenify
 /*	Author: Frenify
@@ -7,7 +8,7 @@
 
 
 	List of CSS codes:
-	
+
 	01) Base
 
 
@@ -580,13 +581,13 @@ a.full_link{
 	left: 0;
 	right: 0;
 	bottom: 0;
-	border-radius: 6px; 
+	border-radius: 6px;
 	border: 3px solid transparent;
 	background: -moz-linear-gradient(45deg,var(--mc1),var(--mc2),var(--mc1),var(--mc2)) border-box;
 	background: -webkit-linear-gradient(45deg,var(--mc1),var(--mc2),var(--mc1),var(--mc2)) border-box;
 	background: linear-gradient(45deg,var(--mc1),var(--mc2),var(--mc1),var(--mc2)) border-box;
 	-webkit-mask:
-	linear-gradient(#fff 0 0) padding-box, 
+	linear-gradient(#fff 0 0) padding-box,
 	linear-gradient(#fff 0 0);
 	-webkit-mask-composite: destination-out;
 	-webkit-mask-composite: source-out;
@@ -935,6 +936,17 @@ a.full_link{
 
 
 
+.fn__herotitle {
+  margin: -0.5em 0 0 0;
+  font-size: 6.5em;
+  padding: 0;
+  font-family: 'Mr Dafoe';
+  position: relative;
+  z-index: 5;
+  color: white;
+  text-shadow: 0 0 0.05em #fff, 0 0 0.2em #fe05e1, 0 0 0.3em #fe05e1;
+  transform: rotate(-7deg);
+}
 
 .fn__maintitle{
 	margin: 0;
@@ -950,13 +962,13 @@ a.full_link{
 	font-size: 60px;
 	text-transform: uppercase;
 }
-.fn__maintitle[data-align="center"]{
+.fn__herotitle[data-align="center"], .fn__maintitle[data-align="center"]{
 	text-align: center;
 }
-.fn__maintitle[data-align="left"]{
+.fn__herotitle[data-align="left"], .fn__maintitle[data-align="left"]{
 	text-align: left;
 }
-.fn__maintitle[data-align="right"]{
+.fn__herotitle[data-align="right"], .fn__maintitle[data-align="right"]{
 	text-align: right;
 }
 .fn__maintitle:before{
@@ -3851,7 +3863,7 @@ a.metaportal_fn_videobutton:hover .fn__svg,
 	font-weight: 500;
 	text-transform: uppercase;
 	margin-bottom: 38px;
-} 
+}
 .metaportal_fn_blog_single .categories a{
 	color: inherit;
 	text-decoration: none;
@@ -5889,7 +5901,7 @@ a.metaportal_fn_videobutton:hover .fn__svg,
 .frenify_cards_gallery .img_holder{
 	padding: 20px;
     border-radius: 20px;
-    
+
     background-color: rgba(255,255,255,.05);
 }
 .frenify_cards_gallery .img_holder:hover:after{
@@ -6034,13 +6046,13 @@ a.metaportal_fn_videobutton:hover .fn__svg,
 	left: 0;
 	right: 0;
 	bottom: 0;
-	border-radius: 0 20px 20px 0; 
+	border-radius: 0 20px 20px 0;
 	border: 3px solid transparent;
 	background: -moz-linear-gradient(45deg,var(--mc1),var(--mc2),var(--mc1),var(--mc2)) border-box;
 	background: -webkit-linear-gradient(45deg,var(--mc1),var(--mc2),var(--mc1),var(--mc2)) border-box;
 	background: linear-gradient(45deg,var(--mc1),var(--mc2),var(--mc1),var(--mc2)) border-box;
 	-webkit-mask:
-	linear-gradient(#fff 0 0) padding-box, 
+	linear-gradient(#fff 0 0) padding-box,
 	linear-gradient(#fff 0 0);
 	-webkit-mask-composite: destination-out;
 	-webkit-mask-composite: source-out;
@@ -6100,7 +6112,7 @@ a.metaportal_fn_videobutton:hover .fn__svg,
 		max-width: 100%;
 		min-height: 500px;
 		min-height: 80vh;
-		
+
 	}
 	.fn_cs_shortabout .about_right:after,
 	.fn_cs_shortabout .about_right:before{
@@ -6497,7 +6509,7 @@ a.metaportal_fn_videobutton:hover .fn__svg,
 	z-index: 10;
 }
 
-/* CSS specific to iOS devices */ 
+/* CSS specific to iOS devices */
 @media not all and (min-resolution:.001dpcm) {
 	.fn__gradient_title{
 		background-clip: text;
