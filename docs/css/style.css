@@ -1181,7 +1181,7 @@ a.full_link{
 }
 .fn_cs_slider .slider_top .item{
 	perspective: 1000px;
-    perspective-origin: 50% 50%;
+  perspective-origin: 50% 50%;
 }
 .fn_cs_slider .slider_top .item_in{
 	padding: 20px;
@@ -5831,7 +5831,11 @@ a.metaportal_fn_videobutton:hover .fn__svg,
 .fn_cs_roadmap .swiper-slide .desc{
 	margin: 0;
 }
-
+.fn_cs_roadmap .swiper-slide .desc a,
+.fn_cs_roadmap .swiper-slide .desc a:hover,
+.fn_cs_roadmap .swiper-slide .desc a:visited{
+  color: #fff;
+}
 
 
 /* Since v4.0 */
@@ -6588,4 +6592,14 @@ a.metaportal_fn_videobutton:hover .fn__svg,
 	position: absolute;
 	transition: all .3s ease;
 	border-radius: 100%;
+}
+
+.donate-image {
+  display: block;
+  margin-top: 10px;
+  text-align: center;
+  max-height: 120px;
+}
+.donate-image img {
+  max-height: 120px;
 }
