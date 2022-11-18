@@ -7,7 +7,7 @@ Object.values(myJson).forEach(val => {
   text = text + "<li class='id5 id13'>" +
     "<div class='nft__item'>" +
     "<div class='img_holder'>" +
-    "<img src='https://ipfs.krazykobe.com/ipfs/QmXzrjBM1QLKUQtzR3iDWoWFptCCWgvzCL7K36souWeTwy/"+ val.name + ".jpg' alt=''>" +
+    "<img src='https://ipfs.krazykobe.com/ipfs/QmdYSTJEnRyjMtuXpE2PeC9M2jA91UYigcmx49fguxQZUt/"+ val.name + ".jpg' alt=''>" +
     "<a href='nft-single.html' class='full_link'></a>" +
     "</div>" +
     "<div class='title_holder'>" +
