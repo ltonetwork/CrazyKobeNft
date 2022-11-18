@@ -146,7 +146,7 @@ const properties = [
   {
     "property1": "painting",
     "property2": "fullbody",
-    "property3": "exlporer",
+    "property3": "explorer",
     "name": "025"
   },
   {
@@ -164,7 +164,7 @@ const properties = [
   {
     "property1": "painting",
     "property2": "closeup",
-    "property3": "outdoot",
+    "property3": "outdoor",
     "name": "028"
   },
   {
@@ -205,7 +205,7 @@ const properties = [
   },
   {
     "property1": "cartoon",
-    "property2": "halfbody",
+    "property2": "halfbust",
     "property3": "explorer",
     "name": "035"
   },
@@ -216,7 +216,7 @@ const properties = [
     "name": "036"
   },
   {
-    "property1": "pciture",
+    "property1": "picture",
     "property2": "closeup",
     "property3": "goodboy",
     "name": "037"
@@ -768,7 +768,7 @@ const properties = [
     "name": 128
   },
   {
-    "property1": "pciture",
+    "property1": "picture",
     "property2": "closeup",
     "property3": "officeworker",
     "name": 129
@@ -1015,19 +1015,19 @@ const properties = [
   },
   {
     "property1": "picture",
-    "property2": "halfbody",
+    "property2": "halfbust",
     "property3": "christmas",
     "name": 170
   },
   {
     "property1": "painting",
-    "property2": "halfbody",
+    "property2": "halfbust",
     "property3": "medieval",
     "name": 171
   },
   {
     "property1": "cartoon",
-    "property2": "halfbody",
+    "property2": "halfbust",
     "property3": "coolkobe",
     "name": 172
   },
