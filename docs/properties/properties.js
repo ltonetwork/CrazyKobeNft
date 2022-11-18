@@ -397,8 +397,8 @@ const properties = [
   },
   {
     "property1": "picture",
-    "property2": "fullbody",
-    "property3": "christmas",
+    "property2": "closeup",
+    "property3": "fluffy",
     "name": "067"
   },
   {
@@ -1148,7 +1148,7 @@ const properties = [
   {
     "property1": "picture",
     "property2": "halfbust",
-    "property3": "christmas",
+    "property3": "officeworker",
     "name": 192
   },
   {
