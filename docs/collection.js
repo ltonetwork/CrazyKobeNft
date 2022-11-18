@@ -4,7 +4,7 @@ let text = "<ul class = 'grid'>";
 
 
 Object.values(myJson).forEach(val => {
-  text = text + "<li class='id5 id13'>" +
+  text = text + "<li class='id" + val.property1 +" id" + val.property2 +" id" + val.property3 +"'>" +
     "<div class='nft__item'>" +
     "<div class='img_holder'>" +
     "<img src='https://ipfs.krazykobe.com/ipfs/QmdYSTJEnRyjMtuXpE2PeC9M2jA91UYigcmx49fguxQZUt/"+ val.name + ".jpg' alt=''>" +
