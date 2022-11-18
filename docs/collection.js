@@ -11,7 +11,7 @@ Object.values(myJson).forEach(val => {
     "<a href='nft-single.html' class='full_link'></a>" +
     "</div>" +
     "<div class='title_holder'>" +
-    "<h3 class='fn_title'><a href='nft-single.html'>Meta Legends #4578</a></h3>" +
+    "<h3 class='fn_title'><a href='nft-single.html'>Krazy Kobe "+ val.name + "</a></h3>" +
     "</div>" +
     "</div>"
 });
