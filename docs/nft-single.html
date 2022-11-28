@@ -27,6 +27,24 @@
 <!--[if lt IE 9]> <script type="text/javascript" src="js/modernizr.custom.js?ver=6.0"></script> <![endif]-->
 <!-- !Styles -->
 
+
+  <script type="module">
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+    document.getElementById("nftImage").innerHTML = "<h3 class='child_category' title='Full body'>full body</h3>";
+    //document.getElementById("nftImg").innerHTML = "<img src='https://ipfs.krazykobe.com/ipfs/QmdYSTJEnRyjMtuXpE2PeC9M2jA91UYigcmx49fguxQZUt/" + id + ".jpg' alt=''>";
+
+    document.getElementById("nftImg").innerHTML =
+      " <div style = 'background-size: cover; " +
+      "background-repeat: no-repeat; " +
+      "background-position: center center;' data-bg-img='https://ipfs.krazykobe.com/ipfs/QmdYSTJEnRyjMtuXpE2PeC9M2jA91UYigcmx49fguxQZUt/" + id + ".jpg' >" +
+      " <div id='nftImg'> " +
+      " <img src='https://ipfs.krazykobe.com/ipfs/QmdYSTJEnRyjMtuXpE2PeC9M2jA91UYigcmx49fguxQZUt/" + id + ".jpg' alt=''>" +
+      " </div> </div>";
+
+    document.getElementById("kkTitle").innerText = "Krazy Kobe " + id;
+  </script>
+
 </head>
 
 <body>
@@ -91,6 +109,7 @@
       <ul>
         <li><a href="index.html#home"><span class="creative_link">Home</span></a></li>
         <li><a href="index.html#about"><span class="creative_link">About</span></a></li>
+        <li><a href="collection.html"><span class="creative_link">Collection</span></a></li>
         <li>
           <a href="#">
             <span class="creative_link">Legal<img src="svg/down.svg" alt="" class="fn__svg"></span>
@@ -226,6 +245,7 @@
       <ul>
         <li><a href="index.html#home"><span class="creative_link">Home</span></a></li>
         <li><a href="index.html#about"><span class="creative_link">About</span></a></li>
+        <li><a href="collection.html"><span class="creative_link">Collection</span></a></li>
         <li>
           <a href="#">
             <span class="creative_link">Legal<img src="svg/down.svg" alt="" class="fn__svg"></span>
@@ -259,7 +279,7 @@
 					<ul>
 						<li><a class="creative_link" href="index.html#home">Home</a></li>
 						<li><a class="creative_link" href="index.html#about">About</a></li>
-						<li><a class="creative_link" href="index.html#collection">Collection</a></li>
+						<li><a class="creative_link" href="collection.html">Collection</a></li>
 					</ul>
 				</div>
 
@@ -282,10 +302,12 @@
 				<!-- Mint Top -->
 				<div class="metaportal_fn_mint_top">
 					<div class="mint_left">
-						<div class="img">
-							<div class="img_in" data-bg-img="img/about/1.jpg">
-								<img src="img/1x1.jpg" alt="">
-							</div>
+						<div class="img" id="nftImg">
+<!--							<div class="img_in"  data-bg-img="https://ipfs.krazykobe.com/ipfs/QmdYSTJEnRyjMtuXpE2PeC9M2jA91UYigcmx49fguxQZUt/001.jpg">-->
+<!--                <div>-->
+<!--                  <img src="https://ipfs.krazykobe.com/ipfs/QmdYSTJEnRyjMtuXpE2PeC9M2jA91UYigcmx49fguxQZUt/001.jpg" alt="">-->
+<!--                </div>-->
+<!--              </div>-->
 						</div>
 					</div>
 					<div class="mint_right">
@@ -299,8 +321,7 @@
 								<li><a href="#"><img src="svg/social/behance-1.svg" alt="" class="fn__svg"></a></li>
 							</ul>
 						</div>
-
-						<h3 class="fn__maintitle" data-text="Meta Legends #5675" data-align="left">Meta Legends #5675</h3>
+						<h3 class="fn__maintitle" data-text="Krazy Kobe" data-align="left" id="kkTitle"></h3>
 
 						<div class="view_on">
 							<ul>
@@ -331,8 +352,11 @@
 					<ul>
 						<li>
 							<div class="item">
-								<h4 class="parent_category">Image</h4>
-								<h3 class="child_category" title="Black Yukata">Black Yukata</h3>
+								<h4 class="parent_category" >Image</h4>
+                <div id="nftImage">
+
+                </div>
+<!--								<h3 class="child_category" title="Black Yukata">Black Yukata</h3>-->
 							</div>
 						</li>
 						<li>
