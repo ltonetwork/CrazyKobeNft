@@ -29,10 +29,12 @@
 
 
   <script type="module">
+    import myJson from './properties/properties.js';
+
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id');
-    document.getElementById("nftImage").innerHTML = "<h3 class='child_category' title='Full body'>full body</h3>";
-    //document.getElementById("nftImg").innerHTML = "<img src='https://ipfs.krazykobe.com/ipfs/QmdYSTJEnRyjMtuXpE2PeC9M2jA91UYigcmx49fguxQZUt/" + id + ".jpg' alt=''>";
+    
+    let line = myJson[parseInt(id)-1]
 
     document.getElementById("nftImg").innerHTML =
       " <div style = 'background-size: cover; " +
@@ -46,6 +48,10 @@
     let element = document.getElementById("kkTitle");
     element.setAttribute("data-text", "Krazy Kobe " + id);
     element.innerText = "Krazy Kobe " + id;
+    document.getElementById("nftImage").innerText = line.property1;
+    document.getElementById("nftBody").innerText = line.property2;
+    document.getElementById("nftType").innerText = line.property3;
+
 
   </script>
 
@@ -359,22 +365,19 @@
 						<li>
 							<div class="item">
 								<h4 class="parent_category" >Image</h4>
-                <div id="nftImage">
-
-                </div>
-<!--								<h3 class="child_category" title="Black Yukata">Black Yukata</h3>-->
+								<h3 class="child_category" title="Image" id="nftImage"></h3>
 							</div>
 						</li>
 						<li>
 							<div class="item">
 								<h4 class="parent_category">Body</h4>
-								<h3 class="child_category" title="Daydreaming">Daydreaming</h3>
+								<h3 class="child_category" title="Body" id="nftBody"></h3>
 							</div>
 						</li>
 						<li>
 							<div class="item">
 								<h4 class="parent_category">Type</h4>
-								<h3 class="child_category" title="Fireflies, Smoke">Fireflies, Smoke</h3>
+								<h3 class="child_category" title="Type" id="nftType"></h3>
 							</div>
 						</li>
 					</ul>
