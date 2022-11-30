@@ -1,0 +1,97 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: nfts
+  size: 1
+  alias: nft
+  permalink: "nft/{{ nft.name }}"
+---
+
+<div class="metaportal_fn_mintpage">
+
+  <div class="container small">
+
+    <!-- Mint Top -->
+    <div class="metaportal_fn_mint_top">
+      <div class="mint_left">
+        <div class="img" id="nftImg">
+          {{ nft.name }}
+<!--							<div class="img_in"  data-bg-img="https://ipfs.krazykobe.com/ipfs/QmdYSTJEnRyjMtuXpE2PeC9M2jA91UYigcmx49fguxQZUt/001.jpg">-->
+<!--                <div>-->
+<!--                  <img src="https://ipfs.krazykobe.com/ipfs/QmdYSTJEnRyjMtuXpE2PeC9M2jA91UYigcmx49fguxQZUt/001.jpg" alt="">-->
+<!--                </div>-->
+<!--              </div>-->
+        </div>
+      </div>
+      <div class="mint_right">
+        <div class="metaportal_fn_share">
+          <h5 class="label">Share:</h5>
+          <ul>
+            <li><a href="#"><img src="svg/social/twitter-1.svg" alt="" class="fn__svg"></a></li>
+            <li><a href="#"><img src="svg/social/facebook-1.svg" alt="" class="fn__svg"></a></li>
+            <li><a href="#"><img src="svg/social/instagram-1.svg" alt="" class="fn__svg"></a></li>
+            <li><a href="#"><img src="svg/social/pinterest-1.svg" alt="" class="fn__svg"></a></li>
+            <li><a href="#"><img src="svg/social/behance-1.svg" alt="" class="fn__svg"></a></li>
+          </ul>
+        </div>
+<!--              <h3 class="fn__maintitle" data-text="Krazy Kobe" data-align="left" id="kkTitle">-->
+          <h3 class="fn__maintitle" data-align="left" id="kkTitle">
+              something
+          </h3>
+        <div class="view_on">
+          <ul>
+            <li>
+              <span>View On:</span>
+            </li>
+            <li>
+              <a href="#"><img src="svg/opensea.svg" alt="" class="fn__svg"></a>
+            </li>
+
+          </ul>
+        </div>
+
+        <div class="mint_desc">
+          <a href="#" target="_blank" class="metaportal_fn_button">
+            <span>Mint Now</span>
+          </a>
+          <p>By clicking “MINT NOW” button, you agree to our <a href="#">Terms of Service</a> and our <a href="#">Privacy Policy</a>.</p>
+        </div>
+      </div>
+
+    </div>
+    <!-- !Mint Top -->
+
+
+    <!-- NFT Categories -->
+    <div class="metaportal_fn_nft_cats">
+      <ul>
+        <li>
+          <div class="item">
+            <h4 class="parent_category" >Image</h4>
+            <h3 class="child_category" title="Image" id="nftImage"></h3>
+          </div>
+        </li>
+        <li>
+          <div class="item">
+            <h4 class="parent_category">Body</h4>
+            <h3 class="child_category" title="Body" id="nftBody"></h3>
+          </div>
+        </li>
+        <li>
+          <div class="item">
+            <h4 class="parent_category">Type</h4>
+            <h3 class="child_category" title="Type" id="nftType"></h3>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <!-- !NFT Categories -->
+
+
+
+
+
+  </div>
+
+
+</div>
