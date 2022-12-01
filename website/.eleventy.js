@@ -7,6 +7,10 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("css");
   eleventyConfig.addPassthroughCopy("svg");
   eleventyConfig.addPassthroughCopy("js");
+  eleventyConfig.addPassthroughCopy(
+    {"node_modules/ethers/dist/ethers.esm.min.js" : "js/ethers.js"}
+  );
+
 
   // Get the first `n` elements of a collection.
   eleventyConfig.addFilter("head", (array, n) => {

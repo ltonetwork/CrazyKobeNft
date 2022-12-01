@@ -6,6 +6,67 @@ pagination:
   alias: nft
 permalink: "collection/nft-{{ nft.name }}.html"
 ---
+<script type="module">
+
+  import {ethers} from "/js/ethers.js";
+
+  let provider;
+
+  document.getElementById("mint").addEventListener("click", mint);
+
+  function mint() {
+  console.log("dsfsdf");
+    if (!window.ethereum) {
+      alert('Metamask not found, please install it');
+      return
+    }
+    const chainId = window.ethereum.request({ method: 'eth_chainId' });
+    if (chainId != 97) {  // BSC testnet
+      window.ethereum.request({
+        method: 'wallet_switchEthereumChain',
+        params: [{ chainId: '0x61' }],
+      });
+    }
+
+
+    window.ethereum.send('eth_requestAccounts');
+    provider = new ethers.providers.Web3Provider(window.ethereum, "any");// any needed to allow network changes
+    console.log(provider);
+    // this.isAddressKnown().then(async resp => {
+    //     if (resp == true) {
+    //
+    //       this.matDialog.open(MintDialogComponent, {
+    //         height: '400px',
+    //         width: '600px',
+    //         panelClass: 'my-css-class'
+    //       });
+    //     }
+    //     else {
+    //       console.log("Address not known");
+    //       window.open(`http://localhost:4200/accounts/participate/${this.projectId}`,"_self")
+    //     }
+    //   }
+    // );
+
+    // let x = isAddressKnown();
+    // console.log(x);
+  }
+
+  // function isAddressKnown() {
+  //   const contractAddress = '0xBA0E036B0Bf7D1C1aF169d4Cf9e49a06A8F3F01a';
+  //   const signer = this.provider.getSigner();
+  //   const address = signer.getAddress();
+  //   const contract = new ethers.Contract(contractAddress, identityABI, this.provider);
+  //   //return contract.isKnown(address)
+  //   return contract['isKnown'](address).then((resp: boolean) => {
+  //     return resp;
+  //   } ).
+  //   catch((error: any) => {
+  //     console.log(error);
+  //     return false;
+  //   })
+  // }
+</script>
 
 <div class="metaportal_fn_mintpage">
 
@@ -50,7 +111,7 @@ permalink: "collection/nft-{{ nft.name }}.html"
         </div>
 
         <div class="mint_desc">
-          <a href="#" target="_blank" class="metaportal_fn_button">
+          <a class="metaportal_fn_button" id="mint">
             <span>Mint Now</span>
           </a>
           <p>By clicking “MINT NOW” button, you agree to our <a href="#">Terms of Service</a> and our <a href="#">Privacy Policy</a>.</p>
