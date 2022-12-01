@@ -13,13 +13,13 @@ var MetaPortalFilterCondition	= 'and';
 
 (function($){
   "use strict";
-	
+
 	var FrenifyPreloader 	= false;
   	var FrenifyTime 		= new Date();
 	var FrenifyCounter		= 0;
-  
+
 	var FrenifyMetaPortal = {
-		
+
 		init: function(){
 			FrenifyMetaPortal.ready();
 			FrenifyMetaPortal.menuCenter();
@@ -51,8 +51,8 @@ var MetaPortalFilterCondition	= 'and';
 			FrenifyMetaPortal.rippleEffect();
 			FrenifyMetaPortal.fullSlider();
 		},
-			
-		
+
+
 		/* since v4.0 */
 		fullSlider: function(){
 			var section		= $('.fn_cs_full_slider .swiper-container');
@@ -117,9 +117,9 @@ var MetaPortalFilterCondition	= 'and';
 					}
 				};
 				new Swiper(element, mainSliderOptions);
-			});	
+			});
 		},
-		
+
 		/* since v4.0 */
 		rippleEffect: function(){
 			if($('#ripple').length){
@@ -128,9 +128,9 @@ var MetaPortalFilterCondition	= 'and';
 					dropRadius: 20,
 					perturbance: 0.04
 				});
-			}	
+			}
 		},
-		
+
 		/* since v4.0 */
 		hero4Swiper: function(){
 			// slider
@@ -152,9 +152,9 @@ var MetaPortalFilterCondition	= 'and';
 					watchSlidesProgress: true,
 				};
 				var mySwiper = new Swiper(element, mainSliderOptions);
-			});	
+			});
 		},
-		
+
 		/* since v4.0 */
 		accordion: function(){
 			$('.fn_cs_accordion').each(function(){
@@ -175,7 +175,7 @@ var MetaPortalFilterCondition	= 'and';
 				});
 			});
 		},
-		
+
 		/* since v4.0 */
 		floww: function(){
 			FrenifyMetaPortal.BgImg();
@@ -211,7 +211,7 @@ var MetaPortalFilterCondition	= 'and';
 				FrenifyMetaPortal.floww_change_slide(index,element);
 			}, timeout);
 		},
-		
+
 		/* since v4.0 */
 		floww_change_slide: function(index, element){
 			var ul 				= element.find('ul'),
@@ -269,7 +269,7 @@ var MetaPortalFilterCondition	= 'and';
 			ul.find('.next2').css({left: next2_left + 'px',top: '240px',transform: 'scale(1) translateZ(0) rotate(30deg)'});
 			ul.find('.prev1').css({left: prev1_left + 'px',top: '90px',transform: 'scale(1) translateZ(0) rotate(-15deg)'});
 			ul.find('.prev2').css({left: prev2_left + 'px',top: '240px',transform: 'scale(1) translateZ(0) rotate(-30deg)'});
-			
+
 			if(children.length > 6){
 				ul.find('.prev3').css({left: prev3_left + 'px',top: '360px',transform: 'scale(1) translateZ(0) rotate(-45deg)'});
 				ul.find('.next3').css({left: next3_left + 'px',top: '360px',transform: 'scale(1) translateZ(0) rotate(45deg)'});
@@ -287,7 +287,7 @@ var MetaPortalFilterCondition	= 'and';
 				FrenifyMetaPortal.flow_calc(element);
 			}
 		},
-		
+
 		/* since v3.0 */
 		roadmapSwiper: function(){
 			// slider
@@ -325,17 +325,17 @@ var MetaPortalFilterCondition	= 'and';
 				var mySwiper = new Swiper(element, mainSliderOptions);
 				var slidersCount = mySwiper.params.loop ? mySwiper.slides.length - 2 : mySwiper.slides.length;
 				var widthParts = 100 / slidersCount;
-				
+
 				var step = element.closest('.fn_cs_roadmap').find('.step_in');
-				
+
 				FrenifyMetaPortal.roadmapStep(mySwiper,step,widthParts);
-				
+
 				mySwiper.on('slideChange', function () {
 					FrenifyMetaPortal.roadmapStep(this,step,widthParts);
 				});
-			});	
+			});
 		},
-		
+
 		roadmapStep: function(mySwiper,step,widthParts){
 			var breakpoint = parseInt(mySwiper.currentBreakpoint);
 			var viewBox;
@@ -349,12 +349,12 @@ var MetaPortalFilterCondition	= 'and';
 
 			step.css({width: (mySwiper.activeIndex+viewBox)*widthParts + '%'});
 		},
-		
+
 		translateVal: function(el) {
 			var progress = el.style.transform.match(/translate3d\((.+)px,(.+)px,(.+)px\)/);
 			return progress[1];
 		},
-		
+
 		menuCenter: function(){
 			var left 		= $('.header .trigger_logo');
 			var right 		= $('.header .wallet');
@@ -367,16 +367,16 @@ var MetaPortalFilterCondition	= 'and';
 			if(right.length){
 				rightWidth 	= parseInt(right.width());
 			}
-			
+
 			if(leftWidth < rightWidth){
 				nav.css({paddingLeft: ((rightWidth - leftWidth)) + 'px'});
 			}else{
 				nav.css({paddingRight: ((leftWidth - rightWidth)) + 'px'});
 			}
 			nav.css({opacity: 1});
-			
+
 		},
-		
+
 		navSubMenu: function(){
 			$('.metaportal_fn_leftnav .nav_holder a').off().on('click',function(){
 				var e = $(this);
@@ -395,120 +395,120 @@ var MetaPortalFilterCondition	= 'and';
 				}
 			});
 		},
-		
+
 		previousItems: function(){
 			$('.metaportal_fn_leftnav .nav_holder .prev').off().on('click',function(){
 				FrenifyCounter--;
 				$('.metaportal_fn_leftnav .nav_holder > ul').css({transform: 'translateX(-'+(100*FrenifyCounter)+'%)'});
 				return false;
-			});	
+			});
 		},
-		
+
 		isotopeCollection: function(){
 			$('.grid').isotope({
 				itemSelector: 'li', // .element-item
 				layoutMode: 'fitRows'
 			});
 		},
-		
-		
+
+
 		applyFilter: function(){
-			
+
 			// initialization isotope function to our items
 			FrenifyMetaPortal.isotopeCollection();
-			
+
 			// left filter on click function
 			$('.metaportal_fn_filters .checkbox').off().on('click',function(){
-				
+
 					// our clicked filter
 				var element 	= $(this),
-					
+
 					// collection wrapper
 					parent		= element.closest('.metaportal_fn_collection'),
-					
+
 					// filter result box
 					resultBox	= parent.find('.metaportal_fn_result_box'),
-					
+
 					// detect selected filter ID
 					id 			= element.data('id'),
-					
+
 					// get category name
 					category 	= element.data('category'),
-					
+
 					// get filter name
 					filterName	= element.find('.text').text(),
-					
+
 					// filter counter wrapper
 					filterCount = resultBox.find('.filter_count span');
-				
+
 				// if clicked item has clicked first time
 				if(!element.hasClass('selected')){
-					
+
 					// attach 'selected' class to our filter
 					element.addClass('selected');
-					
+
 					// add 'clear all' button to our result box if there was no any filters early
 					if(resultBox.find('.result_item').length === 0){
 						resultBox.append('<a href="#" class="clear_all">Clear All</a><a href="#" class="condition_trigger" data-and-text="'+resultBox.data('and-text')+'" data-or-text="'+resultBox.data('or-text')+'"><span class="text">'+resultBox.data('and-text')+'</span><span class="icon"></span></a>');
 					}
-					
+
 					// find our 'clear all' button and add our new filter before the button
-					resultBox.find('.clear_all').before('<div class="result_item" data-id="'+id+'"><a href="#" title="Remove Filter">' + category + ': '+'<span>' + filterName + '</span>' + '<img src="svg/cancel.svg" alt="" class="fn__svg"></a></div>');
-					
+					resultBox.find('.clear_all').before('<div class="result_item" data-id="'+id+'"><a href="#" title="Remove Filter">' + category + ': '+'<span>' + filterName + '</span>' + '<img src="/svg/cancel.svg" alt="" class="fn__svg"></a></div>');
+
 					// change selected filter checkbox value into 'checked'
 					element.find('input[type="checkbox"]').prop('checked','checked');
-					
+
 					// increase filter count and insert into our counter wrapper
 					filterCount.text(parseInt(filterCount.text())+1);
-					
+
 					// add new filter id into our filters array in order to apply isotope filter for items next
 					MetaPortalFilterArray.push(id);
-					
+
 					// recall image to svg functions, because we have added new button where has an svg icon
 					FrenifyMetaPortal.imgToSVG();
-					
+
 					// recall remove filter function, because we have added new filter
 					FrenifyMetaPortal.removeFilter();
 				}
 				// if clicked item has already clicked and clicked second time
 				else{
-					
+
 					// remove attached 'selected' class
 					element.removeClass('selected');
-					
+
 					// remove this filter from result box
 					parent.find('.result_item[data-id="'+id+'"]').remove();
-					
+
 					// remove 'clear all' button if removed filter was the only one (alone)
 					if(resultBox.find('.result_item').length === 0){
 						resultBox.find('.clear_all').remove();
 						resultBox.find('.condition_trigger').remove();
 						MetaPortalFilterCondition = 'and';
 					}
-					
+
 					// change selected filter checkbox value into 'not checked'
 					element.find('input[type="checkbox"]').prop('checked','');
-					
+
 					// decrease filter count and insert into our counter wrapper
 					filterCount.text(parseInt(filterCount.text())-1);
-					
+
 					// remove new filter ID from our filters array in order to apply isotope filter for items next
 					var index = MetaPortalFilterArray.indexOf(id);
 					if(index !== -1){
 						MetaPortalFilterArray.splice(index, 1);
 					}
 				}
-				
-				
+
+
 				FrenifyMetaPortal.recallGridAfterFiltering();
-				
+
 				return false;
 			});
-			
+
 			// call remove filter function
 			FrenifyMetaPortal.removeFilter();
 		},
-		
+
 		recallGridAfterFiltering: function(clear){
 			var $grid = $('.grid').isotope({
 				itemSelector: 'li', // .element-item
@@ -520,7 +520,7 @@ var MetaPortalFilterCondition	= 'and';
 				MetaPortalFilterCondition = 'and';
 				return false;
 			}
-			
+
 			// selected filters
 			var filters = '';
 
@@ -544,7 +544,7 @@ var MetaPortalFilterCondition	= 'and';
 			// run isotope after filter has been clicked
 			$grid.isotope({ filter: filters });
 		},
-		
+
 		removeFilter: function(){
 			$('.metaportal_fn_result_box .result_item a').off().on('click',function(){
 				var e 			= $(this),
@@ -569,7 +569,7 @@ var MetaPortalFilterCondition	= 'and';
 				FrenifyMetaPortal.recallGridAfterFiltering();
 				return false;
 			});
-			
+
 			$('.metaportal_fn_result_box .clear_all').off().on('click',function(){
 				var e 			= $(this),
 					parent		= e.closest('.metaportal_fn_collection'),
@@ -584,7 +584,7 @@ var MetaPortalFilterCondition	= 'and';
 				FrenifyMetaPortal.recallGridAfterFiltering('clear');
 				return false;
 			});
-			
+
 			$('.metaportal_fn_result_box .condition_trigger').off().on('click',function(){
 				var e 			= $(this);
 				var text		= e.find('.text');
@@ -603,13 +603,13 @@ var MetaPortalFilterCondition	= 'and';
 					});
 					MetaPortalFilterCondition = 'or';
 				}
-				
+
 				FrenifyMetaPortal.recallGridAfterFiltering();
-				
+
 				return false;
 			});
 		},
-		
+
 		filterItems: function(){
 			$('.metaportal_fn_filters .filter_item.opened').each(function(){
 				var e = $(this);
@@ -627,7 +627,7 @@ var MetaPortalFilterCondition	= 'and';
 				return false;
 			});
 		},
-		
+
 		hold: function(){
 		var holdable					= $('#social,.metaportal_fn_search');
 			var inactivityTime = function () {
@@ -654,12 +654,12 @@ var MetaPortalFilterCondition	= 'and';
 					holdable.addClass('hold');
 				}
 			});
-				
+
 			inactivityTime();
 		},
-			
-		
-		
+
+
+
 		countdown: function(){
 			$('.metaportal_fn_countdown').each(function(){
 				var e = $(this),
@@ -708,7 +708,7 @@ var MetaPortalFilterCondition	= 'and';
 							text += hours + 'h: ' + minutes + 'm: ' + seconds + 's';
 							e.text(text);
 						}
-						
+
 					}, 1000);
 				}else if(t === 'ever'){
 					setInterval(function(){
@@ -716,7 +716,7 @@ var MetaPortalFilterCondition	= 'and';
 						hours	= Math.floor((ever % 86400) / 3600);
 						minutes	= Math.floor((ever % 3600) / 60);
 						seconds	= Math.floor((ever % 60));
-							
+
 						if(e.hasClass('boxed')){
 							days = (days < 10 ? '0' + days : days);
 							hours = (hours < 10 ? '0' + hours : hours);
@@ -737,7 +737,7 @@ var MetaPortalFilterCondition	= 'and';
 				}
 			});
 		},
-		
+
 		qnt: function(){
 			$('.qnt .decrease').off().on('click',function(){
 				var e = $(this),
@@ -766,7 +766,7 @@ var MetaPortalFilterCondition	= 'and';
 				masonry: {}
 			});
 		},
-		
+
 		headerAnchor: function(){
 			$('.header .nav a').on('click',function(){
 				var e = $(this);
@@ -775,48 +775,48 @@ var MetaPortalFilterCondition	= 'and';
 				}
 			});
 		},
-		
+
 		resizeWalletAndLeftNav: function(){
 			var walletHeight = $('.metaportal_fn_walletbox').height();
 			$('.metaportal_fn_walletbox .walletbox').css({minHeight: walletHeight});
-			
-			
+
+
 			var leftnavHeight = $('.metaportal_fn_leftnav').height();
 			$('.metaportal_fn_leftnav .navbox').css({minHeight: leftnavHeight});
 		},
-		
+
 		ready: function(){
 			$('.metaportal_fn_walletbox, .metaportal_fn_wallet_closer, .metaportal_fn_leftnav, .metaportal_fn_leftnav_closer').removeClass('ready');
 		},
-		
+
 		walletAndLeftNavOpener: function(){
 			var walletbox 	= $('.metaportal_fn_walletbox');
 			var closer		= $('.metaportal_fn_wallet_closer,.metaportal_fn_walletbox .fn__closer');
 			$('.wallet_opener').on('click',function(){
 				walletbox.addClass('active');
 				closer.addClass('active');
-				
+
 				return false;
 			});
 			closer.on('click',function(){
 				walletbox.removeClass('active');
 				closer.removeClass('active');
-				
+
 				return false;
 			});
-			
+
 			var leftNav 	= $('.metaportal_fn_leftnav');
 			var closer2		= $('.metaportal_fn_leftnav_closer,.metaportal_fn_leftnav .fn__closer');
 			$('.header .trigger,.metaportal_fn_mobnav .social_trigger .trigger').on('click',function(){
 				leftNav.addClass('active');
 				closer2.addClass('active');
-				
+
 				return false;
 			});
 			closer2.on('click',function(){
 				leftNav.removeClass('active');
 				closer2.removeClass('active');
-				
+
 				return false;
 			});
 			var mobOpener 	= $('.metaportal_fn_mobnav .mob_mid .trigger');
@@ -829,11 +829,11 @@ var MetaPortalFilterCondition	= 'and';
 					mobOpener.addClass('active');
 					mobDD.slideDown(300);
 				}
-				
+
 				return false;
 			});
 		},
-		
+
 		preloader: function(){
 			if(FrenifyPreloader){return false;}FrenifyPreloader = true;
   			var date2 			= new Date();
@@ -848,7 +848,7 @@ var MetaPortalFilterCondition	= 'and';
 				$('.metaportal_fn_preloader').addClass('ready');
 			},waitTime);
 		},
-		
+
 		seachSomething: function(){
 			var searchOpener 	= $('.metaportal_fn_search');
 			var searchbox 		= $('.metaportal_fn_searchbox');
@@ -888,7 +888,7 @@ var MetaPortalFilterCondition	= 'and';
 				return false;
 			});
 		},
-		
+
 		totopScroll: function(){
 			var minSpeed 		= 500;
 			var maxSpeed		= 1500;
@@ -901,7 +901,7 @@ var MetaPortalFilterCondition	= 'and';
 				return false;
 			});
 		},
-		
+
 		contactForm: function(){
 			$(".contact_form #send_message").on('click', function(){
 				var name 		= $(".contact_form #name").val();
@@ -912,7 +912,7 @@ var MetaPortalFilterCondition	= 'and';
 				var success     = $(".contact_form .returnmessage").data('success');
 
 				$(".contact_form .returnmessage").empty(); //To empty previous error/success message.
-				//checking for blank fields	
+				//checking for blank fields
 				if(name === '' || email === '' || message === ''){
 					$('.contact_form .empty_notice').slideDown(500).delay(2000).slideUp(500);
 				}
@@ -924,7 +924,7 @@ var MetaPortalFilterCondition	= 'and';
 
 
 						if($(".contact_form .returnmessage span.contact_error").length){
-							$(".contact_form .returnmessage").slideDown(500).delay(2000).slideUp(500);		
+							$(".contact_form .returnmessage").slideDown(500).delay(2000).slideUp(500);
 						}else{
 							$(".contact_form .returnmessage").append("<span class='contact_success'>"+ success +"</span>");
 							$(".contact_form .returnmessage").slideDown(500).delay(4000).slideUp(500);
@@ -936,10 +936,10 @@ var MetaPortalFilterCondition	= 'and';
 
 					});
 				}
-				return false; 
+				return false;
 			});
 		},
-		
+
 		collection: function(){
 			$('.fn_cs_collection').each(function(){
 				var collection = $(this);
@@ -956,20 +956,20 @@ var MetaPortalFilterCondition	= 'and';
 					var secondDiv = collection.find('.item').eq(numberTwo);
 					var firstImage = firstDiv.find('input').val();
 					var secondImage = secondDiv.find('input').val();
-					firstDiv.addClass('ready');	
+					firstDiv.addClass('ready');
 					secondDiv.addClass('ready');
 					setTimeout(function(){
 						firstDiv.find('input').val(secondImage);
 						firstDiv.find('.abs_img').css({backgroundImage: 'url('+secondImage+')'});
 						secondDiv.find('input').val(firstImage);
 						secondDiv.find('.abs_img').css({backgroundImage: 'url('+firstImage+')'});
-						firstDiv.removeClass('ready');	
+						firstDiv.removeClass('ready');
 						secondDiv.removeClass('ready');
 					},500);
 				},2000);
 			});
 		},
-		
+
 		video: function(){
 			$('.popup-youtube, .popup-vimeo').each(function() { // the containers for all your galleries
 				$(this).magnificPopup({
@@ -985,11 +985,11 @@ var MetaPortalFilterCondition	= 'and';
 			$('.popup-soundcloud').magnificPopup({
 				type: 'image',
 				gallery: {
-					enabled: true, 
+					enabled: true,
 				},
-			});	
+			});
 		},
-		
+
 		fn_cs_counter: function(){
 			$('.fn_cs_counter').each(function() {
 				var el = $(this);
@@ -1000,15 +1000,15 @@ var MetaPortalFilterCondition	= 'and';
 								refreshInterval: 50,
 								formatter: function (value, options) {
 									return value.toFixed(options.decimals).replace(/\B(?=(?:\d{3})+(?!\d))/g, '');
-								},	
+								},
 							});
 						}
 					},
-					offset:'90%'	
+					offset:'90%'
 				});
-			});	
+			});
 		},
-		
+
 		headerFixer: function(){
 			var body		= $('body');
 			var header		= $('.header');
@@ -1024,23 +1024,23 @@ var MetaPortalFilterCondition	= 'and';
 				body.removeClass('totop-active');
 			}
 		},
-		
+
 		slider: function(){
 			$('.fn_cs_slider').each(function(){
 				var slider 			= $(this);
-				
+
 				var sliderTop 		= slider.find('.slider_top');
 				var sliderBottom 	= slider.find('.slider_content');
 				var activeIndex 	= 2;
 				var speed			= 6000; // milliseconds
-				
+
 				// init slider animation
 				var myInterval 		= setInterval(function(){
 					activeIndex++;
 					activeIndex 	= FrenifyMetaPortal.sliderDo(sliderTop,sliderBottom,activeIndex);
 				},speed);
-				
-				
+
+
 				// previous navigation button
 				slider.find('.slider_nav .prev').off().on('click',function(){
 					clearInterval(myInterval);
@@ -1052,7 +1052,7 @@ var MetaPortalFilterCondition	= 'and';
 					},speed);
 					return false;
 				});
-				
+
 				// next navigation button
 				slider.find('.slider_nav .next').off().on('click',function(){
 					clearInterval(myInterval);
@@ -1064,7 +1064,7 @@ var MetaPortalFilterCondition	= 'and';
 					},speed);
 					return false;
 				});
-				
+
 				// previous and next item
 				slider.find('.slider_top li').on('click',function(e){
 					var getClass = $(this).attr('class');
@@ -1088,9 +1088,9 @@ var MetaPortalFilterCondition	= 'and';
 					}
 				});
 			});
-				
+
 		},
-		
+
 		sliderDo: function(sliderTop,sliderBottom,activeIndex){
 			var topLength	= sliderTop.find('li').length;
 			if(activeIndex > topLength){activeIndex-=topLength;}
@@ -1115,13 +1115,13 @@ var MetaPortalFilterCondition	= 'and';
 			sliderTop.find('li[data-index="'+indexNext2+'"]').addClass('next2');
 			return activeIndex;
 		},
-		
-		
+
+
 		totopFixer: function(){
-			var w = $('.metaportal_fn_totop .totop_inner').width();	
+			var w = $('.metaportal_fn_totop .totop_inner').width();
 			$('.metaportal_fn_totop').css({height: w + 'px'});
 		},
-		
+
 		imgToSVG: function(){
 			$('img.fn__svg').each(function(){
 				var img 		= $(this);
@@ -1151,10 +1151,10 @@ var MetaPortalFilterCondition	= 'and';
 				}
 			});
 		},
-    
+
   	};
-  	
-	
+
+
 	// READY Functions
 	$(document).ready(function(){
 		FrenifyMetaPortal.init();
@@ -1163,7 +1163,7 @@ var MetaPortalFilterCondition	= 'and';
 			FrenifyMetaPortal.isotopeCollection();
 		},150);
 	});
-	
+
 	// RESIZE Functions
 	$(window).on('resize',function(){
 		FrenifyMetaPortal.floww_calc_call();
@@ -1173,28 +1173,28 @@ var MetaPortalFilterCondition	= 'and';
 		FrenifyMetaPortal.isotopeCollection();
 		FrenifyMetaPortal.roadmapSwiper();
 	});
-	
+
 	// LOAD Functions
 	$(window).on('load',function(){
 		FrenifyMetaPortal.preloader();
 		FrenifyMetaPortal.isotope();
 		FrenifyMetaPortal.isotopeCollection();
-		
+
 		setTimeout(function(){
-			
+
 			FrenifyMetaPortal.isotope();
 			FrenifyMetaPortal.isotopeCollection();
 		},200);
 	});
-	
+
 	$(window).on('scroll',function(){
 		FrenifyMetaPortal.headerFixer();
 	});
-	
+
   	window.addEventListener("load", function(){
 		FrenifyMetaPortal.preloader();
 	});
-	
+
 })(jQuery);
 
 
@@ -1218,29 +1218,29 @@ function FrenifyRunStars(){
 	// Calculate the screen size
 	screenH = $('.canvas_bg').outerHeight();
 	screenW = $(window).outerWidth();
-	
+
 	// Get the canvas
 	canvas = $('#space');
-	
+
 	// Fill out the canvas
 	canvas.attr('height', screenH);
 	canvas.attr('width', screenW);
 	context = canvas[0].getContext('2d');
-	
+
 	// Create all the stars
 	for(var i = 0; i < numStars; i++) {
 		var x = Math.round(Math.random() * screenW);
 		var y = Math.round(Math.random() * screenH);
 		var length = 1 + Math.random() * 2;
 		var opacity = Math.random();
-		
+
 		// Create a new star and draw
 		var star = new Star(x, y, length, opacity);
-		
+
 		// Add the the stars array
 		stars.push(star);
 	}
-	
+
 	setInterval(animate, 1000 / fps);
 }
 
@@ -1257,7 +1257,7 @@ function animate() {
 
 /**
  * Star
- * 
+ *
  * @param int x
  * @param int y
  * @param int length
@@ -1275,35 +1275,35 @@ function Star(x, y, length, opacity) {
 
 /**
  * Draw a star
- * 
+ *
  * This function draws a start.
- * You need to give the contaxt as a parameter 
- * 
+ * You need to give the contaxt as a parameter
+ *
  * @param context
  */
 Star.prototype.draw = function() {
 	"use strict";
 	context.rotate((Math.PI * 1 / 10));
-	
+
 	// Save the context
 	context.save();
-	
+
 	// move into the middle of the canvas, just to make room
 	context.translate(this.x, this.y);
-	
+
 	// Change the opacity
 	if(this.opacity > 1) {
 		this.factor = -1;
 	}
 	else if(this.opacity <= 0) {
 		this.factor = 1;
-		
+
 		this.x = Math.round(Math.random() * screenW);
 		this.y = Math.round(Math.random() * screenH);
 	}
-		
+
 	this.opacity += this.increment * this.factor;
-	
+
 	context.beginPath();
 	for (var i = 5; i--;) {
 		context.lineTo(0, this.length);
@@ -1319,6 +1319,6 @@ Star.prototype.draw = function() {
 	context.shadowBlur = 5;
 	context.shadowColor = '#ffff33';
 	context.fill();
-	
+
 	context.restore();
 };

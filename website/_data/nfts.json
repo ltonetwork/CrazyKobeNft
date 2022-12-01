@@ -1,4 +1,4 @@
-const properties = [
+[
   {
     "property1": "picture",
     "property2": "fullbody",
@@ -1200,5 +1200,3 @@ const properties = [
     "name": 200
   }
 ]
-
-export default properties;

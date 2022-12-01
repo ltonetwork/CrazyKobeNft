@@ -42,3 +42,7 @@ testem.log
 Thumbs.db
 
 .idea
+_site
+./website/_site
+node_modules
+website/node_modules
