@@ -1,4 +1,6 @@
 const fs = require("fs");
+const markdownIt = require("markdown-it");
+const markdownItAnchor = require("markdown-it-anchor");
 
 module.exports = function(eleventyConfig) {
   // Copy the `img` and `css` folders to the output
@@ -19,6 +21,20 @@ module.exports = function(eleventyConfig) {
     return array.slice(0, n);
   });
 
+  // Customize Markdown library and settings:
+  let markdownLibrary = markdownIt({
+    html: true,
+    linkify: true
+  }).use(markdownItAnchor, {
+    permalink: markdownItAnchor.permalink.ariaHidden({
+      placement: "after",
+      class: "direct-link",
+      symbol: "#"
+    }),
+    level: [1,2,3,4],
+    slugify: eleventyConfig.getFilter("slugify")
+  });
+  eleventyConfig.setLibrary("md", markdownLibrary);
 
   return {
     // Control which files Eleventy will process
