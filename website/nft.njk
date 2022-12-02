@@ -6,66 +6,67 @@ pagination:
   alias: nft
 permalink: "collection/nft-{{ nft.name }}.html"
 ---
-<script type="module">
+<script type="module" async>
 
   import {ethers} from "/js/ethers.js";
-
-  let provider;
+  import {abi} from "/js/identity-contract.js";
 
   document.getElementById("mint").addEventListener("click", mint);
 
-  function mint() {
-  console.log("dsfsdf");
+
+  async function mint() {
     if (!window.ethereum) {
       alert('Metamask not found, please install it');
       return
     }
-    const chainId = window.ethereum.request({ method: 'eth_chainId' });
+    const chainId = await window.ethereum.request({ method: 'eth_chainId' });
     if (chainId != 97) {  // BSC testnet
-      window.ethereum.request({
+      await window.ethereum.request({
         method: 'wallet_switchEthereumChain',
         params: [{ chainId: '0x61' }],
       });
     }
 
+    await window.ethereum.send('eth_requestAccounts');
+    let provider = new ethers.providers.Web3Provider(window.ethereum, "any");// any needed to allow network changes
+    isAddressKnown(provider).then(async resp => {
+        console.log("Inside the response: ", resp);
+        if (resp == true) {
 
-    window.ethereum.send('eth_requestAccounts');
-    provider = new ethers.providers.Web3Provider(window.ethereum, "any");// any needed to allow network changes
-    console.log(provider);
-    // this.isAddressKnown().then(async resp => {
-    //     if (resp == true) {
-    //
-    //       this.matDialog.open(MintDialogComponent, {
-    //         height: '400px',
-    //         width: '600px',
-    //         panelClass: 'my-css-class'
-    //       });
-    //     }
-    //     else {
-    //       console.log("Address not known");
-    //       window.open(`http://localhost:4200/accounts/participate/${this.projectId}`,"_self")
-    //     }
-    //   }
-    // );
+          console.log("Continue with the minting procedure");
+          // const signer = this.provider.getSigner();
+          // const contract = new ethers.Contract("0x1585233e4B961f222653DFe642b81116bBb3AcD1", globalAbi, this.provider);
+          // const estimatedGas = await contract.connect(signer).estimateGas['mint']();
+          // const result = await contract.connect(signer)['mint']({
+          //   gasLimit: estimatedGas,
+          //   nonce: undefined,
+          // });
+          // console.log("Result: ", result);
+          // return result.wait();
 
-    // let x = isAddressKnown();
-    // console.log(x);
+        }
+        else {
+          console.log("Address not known");
+          window.open(`http://localhost:4200/accounts/participate/${this.projectId}`,"_self")
+        }
+      }
+    );
   }
 
-  // function isAddressKnown() {
-  //   const contractAddress = '0xBA0E036B0Bf7D1C1aF169d4Cf9e49a06A8F3F01a';
-  //   const signer = this.provider.getSigner();
-  //   const address = signer.getAddress();
-  //   const contract = new ethers.Contract(contractAddress, identityABI, this.provider);
-  //   //return contract.isKnown(address)
-  //   return contract['isKnown'](address).then((resp: boolean) => {
-  //     return resp;
-  //   } ).
-  //   catch((error: any) => {
-  //     console.log(error);
-  //     return false;
-  //   })
-  // }
+  async function isAddressKnown(provider) {
+    const contractAddress = '0xBA0E036B0Bf7D1C1aF169d4Cf9e49a06A8F3F01a';
+    const signer = provider.getSigner();
+    const address = await signer.getAddress();
+    const contract = new ethers.Contract(contractAddress, abi, provider);
+    //return contract.isKnown(address)
+    return contract['isKnown'](address).then((resp) => {
+      return resp;
+    }).
+    catch((error) => {
+      console.log(error);
+      return false;
+    })
+  }
 </script>
 
 <div class="metaportal_fn_mintpage">
