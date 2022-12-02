@@ -47,7 +47,8 @@ permalink: "collection/nft-{{ nft.name }}.html"
         }
         else {
           console.log("Address not known");
-          window.open(`http://localhost:4200/accounts/participate/${this.projectId}`,"_self")
+          //redirect to participate with the url of this page as redirectUrl
+          //window.open(`http://localhost:4200/accounts/participate?redirectUrl=${encodeURIComponent(window.location.href)}`,"_self")
         }
       }
     );
