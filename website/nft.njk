@@ -11,8 +11,8 @@ permalink: "collection/nft-{{ nft.name }}.html"
   import {ethers} from "/js/ethers.js";
   import {abi} from "/js/identity-contract.js";
 
-  document.getElementById("mint").addEventListener("click", mint);
-  document.getElementById("modalText").innerText("Connecting to MetaMask...");
+  // document.getElementById("mint").addEventListener("click", mint);
+  document.getElementById("modalText").innerHTML = "Connecting to MetaMask...";
 
 
   async function mint() {
@@ -81,7 +81,6 @@ permalink: "collection/nft-{{ nft.name }}.html"
   // When the user clicks the button, open the modal
   btn.onclick = function() {
     modal.style.display = "block";
-    document.getElementById(id).innerHTML = new HTML
     mint();
   }
 
@@ -139,7 +138,7 @@ permalink: "collection/nft-{{ nft.name }}.html"
 
           </ul>
         </div>
-        <a  class="metaportal_fn_button" id="myBtn">Open Modal</a>
+        <a  class="metaportal_fn_button" id="myBtn">Mint Now</a>
 
         <!-- The Modal -->
         <div id="myModal" class="modal">
@@ -147,7 +146,7 @@ permalink: "collection/nft-{{ nft.name }}.html"
           <!-- Modal content -->
           <div class="modal-content">
             <span class="close">&times;</span>
-            <p>Some text in the Modal..</p>
+            <p id="modalText">Some text in the Modal..</p>
           </div>
 
         </div>
@@ -156,7 +155,7 @@ permalink: "collection/nft-{{ nft.name }}.html"
 {#          <a class="metaportal_fn_button" id="mint">#}
 {#            <span>Mint Now</span>#}
 {#          </a>#}
-          <p id="modalText">By clicking “MINT NOW” button, you agree to our <a href="#">Terms of Service</a> and our <a href="#">Privacy Policy</a>.</p>
+          <p>By clicking “MINT NOW” button, you agree to our <a href="#">Terms of Service</a> and our <a href="#">Privacy Policy</a>.</p>
         </div>
       </div>
 
