@@ -33,7 +33,7 @@ permalink: "collection/nft-{{ nft.name }}.html"
     isAddressKnown(provider).then(async resp => {
         console.log("Inside the response: ", resp);
         if (resp == true) {
-
+          document.getElementById("modalText").innerHTML = "Minting the NFT";
           console.log("Continue with the minting procedure");
           // const signer = this.provider.getSigner();
           // const contract = new ethers.Contract("0x1585233e4B961f222653DFe642b81116bBb3AcD1", globalAbi, this.provider);
@@ -47,12 +47,20 @@ permalink: "collection/nft-{{ nft.name }}.html"
 
         }
         else {
-          console.log("Address not known");
+          document.getElementById("modalText").innerHTML = "<p> It appears your metamask address is un-known<p>" +
+            "<p> you will be redirected to Proofi for your registration </p>" ;
+          await delay(2000);
           //redirect to participate with the url of this page as redirectUrl
-          //window.open(`http://localhost:4200/accounts/participate?redirectUrl=${encodeURIComponent(window.location.href)}`,"_self")
+          window.open(`http://localhost:4200/accounts/participate?redirectUrl=${encodeURIComponent(window.location.href)}`,"_self")
         }
       }
     );
+  }
+
+  function delay(milliseconds){
+    return new Promise(resolve => {
+      setTimeout(resolve, milliseconds);
+    });
   }
 
   async function isAddressKnown(provider) {
@@ -74,6 +82,7 @@ permalink: "collection/nft-{{ nft.name }}.html"
 
   // Get the button that opens the modal
   var btn = document.getElementById("myBtn");
+
 
   // Get the <span> element that closes the modal
   var span = document.getElementsByClassName("close")[0];
