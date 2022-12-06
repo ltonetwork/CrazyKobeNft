@@ -30,6 +30,7 @@ permalink: "collection/nft-{{ nft.name }}.html"
 
     await window.ethereum.send('eth_requestAccounts');
     let provider = new ethers.providers.Web3Provider(window.ethereum, "any");// any needed to allow network changes
+    document.getElementById("modalText").innerHTML = "Verifying the wallet...";
     isAddressKnown(provider).then(async resp => {
         console.log("Inside the response: ", resp);
         if (resp == true) {
