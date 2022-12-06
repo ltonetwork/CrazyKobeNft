@@ -12,6 +12,7 @@ permalink: "collection/nft-{{ nft.name }}.html"
   import {abi} from "/js/identity-contract.js";
 
   document.getElementById("mint").addEventListener("click", mint);
+  document.getElementById("modalText").innerText("Connecting to MetaMask...");
 
 
   async function mint() {
@@ -68,6 +69,33 @@ permalink: "collection/nft-{{ nft.name }}.html"
       return false;
     })
   }
+
+  var modal = document.getElementById("myModal");
+
+  // Get the button that opens the modal
+  var btn = document.getElementById("myBtn");
+
+  // Get the <span> element that closes the modal
+  var span = document.getElementsByClassName("close")[0];
+
+  // When the user clicks the button, open the modal
+  btn.onclick = function() {
+    modal.style.display = "block";
+    document.getElementById(id).innerHTML = new HTML
+    mint();
+  }
+
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
 </script>
 
 <div class="metaportal_fn_mintpage">
@@ -111,12 +139,24 @@ permalink: "collection/nft-{{ nft.name }}.html"
 
           </ul>
         </div>
+        <a  class="metaportal_fn_button" id="myBtn">Open Modal</a>
+
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+
+          <!-- Modal content -->
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Some text in the Modal..</p>
+          </div>
+
+        </div>
 
         <div class="mint_desc">
-          <a class="metaportal_fn_button" id="mint">
-            <span>Mint Now</span>
-          </a>
-          <p>By clicking “MINT NOW” button, you agree to our <a href="#">Terms of Service</a> and our <a href="#">Privacy Policy</a>.</p>
+{#          <a class="metaportal_fn_button" id="mint">#}
+{#            <span>Mint Now</span>#}
+{#          </a>#}
+          <p id="modalText">By clicking “MINT NOW” button, you agree to our <a href="#">Terms of Service</a> and our <a href="#">Privacy Policy</a>.</p>
         </div>
       </div>
 
