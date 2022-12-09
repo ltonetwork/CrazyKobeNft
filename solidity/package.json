@@ -1,0 +1,33 @@
+{
+  "name": "solidity",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "scripts/test.sh",
+    "migrate": "truffle migrate --compile-all --network mainnet",
+    "migrate:dev": "truffle migrate --compile-all --network development",
+    "migrate:goerli": "truffle migrate --compile-all --network goerli",
+    "verify": "truffle run verify --network mainnet",
+    "verify:goerli": "truffle run verify --network goerli",
+    "deploy": "npm run migrate && npm run verify"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.4.0",
+    "@proofi/contracts": "^0.1.2",
+    "dotenv": "^16.0.3"
+  },
+  "devDependencies": {
+    "@gnosis.pm/mock-contract": "github:gnosis/mock-contract#master",
+    "@openzeppelin/test-helpers": "^0.5.16",
+    "@truffle/hdwallet-provider": "^2.1.2",
+    "ganache": "^7.5.0",
+    "mocha": "^10.1.0",
+    "truffle": "^5.6.8",
+    "truffle-assertions": "^0.9.2",
+    "truffle-plugin-verify": "^0.6.1"
+  }
+}
