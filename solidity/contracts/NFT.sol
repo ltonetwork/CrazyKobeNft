@@ -14,7 +14,7 @@ contract NFT is ERC721, Ownable, Verification {
 
     string private baseURI;
 
-    uint public price = 5000000000000000; // 5 dollar in wei
+    //uint public price = 5000000000000000; // 5 dollar in wei
 
     constructor(string memory _name, string memory _symbol) ERC721(_name, _symbol) { }
 
@@ -30,7 +30,7 @@ contract NFT is ERC721, Ownable, Verification {
         require(mintedToken[id] == false, "The token has already been minted.");
         require(reserved[id] == address(0), "The token has already been reserved.");
         require(mintedPerWallet[msg.sender] < 1, "You can only mint one NFT per person.");
-        require(price <= msg.value, "Insufficient funds.");
+        //require(price <= msg.value, "Insufficient funds.");
 
         if (isApproved(msg.sender)) {
             _safeMint(msg.sender, id);
@@ -101,7 +101,7 @@ contract NFT is ERC721, Ownable, Verification {
     }
 
     // Don't allow transfer of reserved tokens.
-    function _beforeTokenTransfer(address, address, uint256 tokenId) internal override {
+    function _beforeTokenTransfer(address, address, uint256 tokenId) internal {
         require(reserved[tokenId] == address(0), "Token is lock, please get verified");
     }
 
@@ -123,7 +123,7 @@ contract NFT is ERC721, Ownable, Verification {
         return baseURI;
     }
 
-    function setPrice(uint256 _price) external onlyOwner {
+    /*function setPrice(uint256 _price) external onlyOwner {
         price = _price;
-    }
+    }*/
 }
