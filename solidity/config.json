@@ -1,11 +1,12 @@
 {
   "default": {
     "name": "Krazy Kobe",
-    "symbol": "KOBE"
+    "symbol": "KOBE",
+    "maxTokens": 10,
+    "maxPerWallet": 1,
+    "price": 5000000000000000
   },
   "goerli": {
-    "name": "Krazy Kobe",
-    "symbol": "KOBE",
     "verification": {
       "identityProvider": "0xbBA38836dca7173a4B66D24E48dd0993b0d9Bf17",
       "token": "0x326C977E6efc84E512bB9C30f76E30c160eD06FB",

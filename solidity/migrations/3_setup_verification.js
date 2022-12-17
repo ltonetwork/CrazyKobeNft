@@ -3,7 +3,7 @@ const allConfigs = require("../config.json");
 const Web3 = require("web3");
 
 module.exports = async function(deployer, network) {
-  const config = allConfigs[network.replace(/-fork$/, '')] || allConfigs.default;
+  const config = {...allConfigs.default, ...(allConfigs[network.replace(/-fork$/, '')] || {})};
   if (!config.verification) return;
 
   const nft = await NFT.deployed();
