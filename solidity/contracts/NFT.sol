@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
-import "@proofi/contracts/contracts/Verification.sol";
+import "@proofi/solidity/contracts/Verification.sol";
 
 // This demo is an NFT that can only be minted by verified wallets.
 // Minted NFTs are initially reserved and unreserved on verification.

@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
-import "@proofi/contracts/contracts/IProvider.sol";
+import "@proofi/solidity/contracts/IProvider.sol";
 
 
 contract DummyProvider is IProvider {
