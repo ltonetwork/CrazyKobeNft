@@ -11,7 +11,7 @@ module.exports = async function(deployer, network) {
     config.verification.identityProvider,
     config.verification.token,
     config.verification.oracle,
-    config.verificatin.jobId,
+    config.verification.jobId,
     Web3.utils.toBN(config.verification.fee),
   );
 

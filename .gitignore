@@ -46,3 +46,6 @@ _site
 ./website/_site
 node_modules
 website/node_modules
+
+solidity/.env
+/solidity/build/
