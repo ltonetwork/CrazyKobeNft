@@ -52,6 +52,9 @@ permalink: "collection/nft-{{ nft.name }}.html"
             gasLimit: 10000000,
             nonce: undefined,
           });
+
+          // Todo: if you click outside the modal it should not close ??
+
           console.log("Result: ", result);
           const ret = await result.wait();
           document.getElementById("modalText").innerHTML = "NFT successfully minted";
