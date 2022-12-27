@@ -14,6 +14,7 @@ permalink: "collection/nft-{{ nft.name }}.html"
 
   // document.getElementById("mint").addEventListener("click", mint);
   document.getElementById("modalText").innerHTML = "Connecting to MetaMask...";
+  const nftContractAddress = "0x4A9F98f48Bf6fD8c74b87c4e88480E0Ff1B9Bc5f";
 
 
   async function mint() {
@@ -39,7 +40,7 @@ permalink: "collection/nft-{{ nft.name }}.html"
           document.getElementById("modalText").innerHTML = "Minting the NFT";
           console.log("Continue with the minting procedure");
           const signer = provider.getSigner();
-          const contract = new ethers.Contract("0x4A9F98f48Bf6fD8c74b87c4e88480E0Ff1B9Bc5f", nftAbi, provider);
+          const contract = new ethers.Contract(nftContractAddress, nftAbi, provider);
           // const estimatedGas = await contract.connect(signer).estimateGas['mint']({
           //     gasLimit: 1000000000,
           //     nonce: undefined,
@@ -53,12 +54,30 @@ permalink: "collection/nft-{{ nft.name }}.html"
             nonce: undefined,
           });
 
-          // Todo: if you click outside the modal it should not close ??
 
-          console.log("Result: ", result);
-          const ret = await result.wait();
-          document.getElementById("modalText").innerHTML = "NFT successfully minted";
-          return ret;
+          try {
+            const ret = await result.wait()
+            console.log(ret);
+            document.getElementById("modalText").innerHTML = "NFT successfully minted";
+
+          } catch (error) {
+            console.error(error);
+            document.getElementById("modalText").innerHTML = "Minting unsuccessfull";
+            // expected output: ReferenceError: nonExistentFunction is not defined
+            // Note - error messages will vary depending on browser
+          }
+
+
+          // console.log("Result: ", result);
+          // const ret = await result.wait().catch(
+          //   () => {
+          //     document.getElementById("modalText").innerHTML = "Minting unsuccessfull";
+          //     return null;
+          //   }
+          // );
+          // console.log("ret: ", ret);
+          // document.getElementById("modalText").innerHTML = "NFT successfully minted";
+          // return ret;
         }
         else {
           document.getElementById("modalText").innerHTML = "<p> It appears your metamask address is un-known<p>" +
@@ -113,11 +132,11 @@ permalink: "collection/nft-{{ nft.name }}.html"
   }
 
   // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function(event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
-    }
-  }
+  // window.onclick = function(event) {
+  //   if (event.target == modal) {
+  //     modal.style.display = "none";
+  //   }
+  // }
 </script>
 
 <div class="metaportal_fn_mintpage">
