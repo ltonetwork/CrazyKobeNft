@@ -7,7 +7,6 @@ pagination:
 permalink: "collection/nft-{{ nft.name }}.html"
 ---
 <script type="module" async>
-
   import {ethers} from "/js/ethers.js";
   import {abi} from "/js/identity-contract.js";
   import {abi as nftAbi} from "/js/nft-abi.js";
@@ -16,22 +15,21 @@ permalink: "collection/nft-{{ nft.name }}.html"
   document.getElementById("modalText").innerHTML = "Connecting to MetaMask...";
   const nftContractAddress = "0x4A9F98f48Bf6fD8c74b87c4e88480E0Ff1B9Bc5f";
 
-  // TODO: need to call the smart contract to see if the nft is available or not
-
-  // https://tutorial.eyehunts.com/js/how-to-use-javascript-variable-in-html-if-condition-example-code/
-  // https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_state_if_else
   let provider;
   let contract;
-  let minted = false;
+  var minted = false;
   const id = window.location.href.split('-').pop().split('.')[0];
 
   if (window.ethereum) {
     provider = new ethers.providers.Web3Provider(window.ethereum, "any");
     let signer = provider.getSigner();
     contract = new ethers.Contract(nftContractAddress, nftAbi, provider);
-    let resp = await contract.connect(signer)['isAvailable']('0x' + id);
-    minted = !resp;
-    console.log("minted :", minted);
+    let isAvailable = await contract.connect(signer)['isAvailable']('0x' + id);
+    let soldOut = document.getElementById("sold_out");
+    if (!isAvailable) {
+      soldOut.removeAttribute("hidden");
+      document.getElementById("mint").disabled = true;
+    }
   }
 
   async function mint() {
@@ -136,18 +134,24 @@ permalink: "collection/nft-{{ nft.name }}.html"
 
   <div class="container small">
 
+    <input type="hidden" id="hiddenVar"/>
+
     <!-- Mint Top -->
     <div class="metaportal_fn_mint_top">
-      <div class="mint_left">
-        <div class="img" id="nftImg">
-							<div class="img_in"  data-bg-img='https://ipfs.krazykobe.com/ipfs/QmdYSTJEnRyjMtuXpE2PeC9M2jA91UYigcmx49fguxQZUt/{{ nft.name}}.jpg'>
-							<div class="img_in"  data-bg-img='https://ipfs.krazykobe.com/ipfs/QmYUqng7Ccmni7uTnumNF5v5wkQZA9w3CEuJfQQ2tSic8R/sold-out.png'>
-                <div>
-                  <img src='https://ipfs.krazykobe.com/ipfs/QmdYSTJEnRyjMtuXpE2PeC9M2jA91UYigcmx49fguxQZUt/{{ nft.name }}.jpg' alt=''>
-{#                  <img src='https://ipfs.krazykobe.com/ipfs/QmYUqng7Ccmni7uTnumNF5v5wkQZA9w3CEuJfQQ2tSic8R/sold-out.png' alt=''>#}
-                </div>
+      <div style="position: relative">
+        <div class="mint_left">
+          <div class="img" >
+            <div class="img_in" data-bg-img='https://ipfs.krazykobe.com/ipfs/QmdYSTJEnRyjMtuXpE2PeC9M2jA91UYigcmx49fguxQZUt/{{ nft.name}}.jpg'>
+              <div>
+                <img src='https://ipfs.krazykobe.com/ipfs/QmdYSTJEnRyjMtuXpE2PeC9M2jA91UYigcmx49fguxQZUt/{{ nft.name }}.jpg' alt=''>
+  {#              <img src="https://ipfs.krazykobe.com/ipfs/QmYUqng7Ccmni7uTnumNF5v5wkQZA9w3CEuJfQQ2tSic8R/sold-out.png" alt="">#}
               </div>
+  {#              <div id="nftImg"> </div>#}
+            </div>
+
+          </div>
         </div>
+        <img class="mint_left" id="sold_out" src="https://ipfs.krazykobe.com/ipfs/QmYUqng7Ccmni7uTnumNF5v5wkQZA9w3CEuJfQQ2tSic8R/sold-out.png" alt="" hidden>
       </div>
       <div class="mint_right">
         <div class="metaportal_fn_share">
