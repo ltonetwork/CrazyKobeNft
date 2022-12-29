@@ -7,13 +7,29 @@ pagination:
 permalink: "collection/nft-{{ nft.name }}.html"
 ---
 <script type="module" async>
-
   import {ethers} from "/js/ethers.js";
   import {abi} from "/js/identity-contract.js";
+  import {abi as nftAbi} from "/js/nft-abi.js";
 
-  // document.getElementById("mint").addEventListener("click", mint);
   document.getElementById("modalText").innerHTML = "Connecting to MetaMask...";
+  const nftContractAddress = "0x4A9F98f48Bf6fD8c74b87c4e88480E0Ff1B9Bc5f";
 
+  let provider;
+  let contract;
+  var isAvailable = true;
+  const id = window.location.href.split('-').pop().split('.')[0];
+
+  if (window.ethereum) {
+    provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+    let signer = provider.getSigner();
+    contract = new ethers.Contract(nftContractAddress, nftAbi, provider);
+    isAvailable = await contract.connect(signer)['isAvailable']('0x' + id);
+    let soldOut = document.getElementById("sold_out");
+    if (!isAvailable) {
+      soldOut.removeAttribute("hidden");
+      document.getElementById("myBtn").disabled = true;
+    }
+  }
 
   async function mint() {
     if (!window.ethereum) {
@@ -21,37 +37,43 @@ permalink: "collection/nft-{{ nft.name }}.html"
       return
     }
     const chainId = await window.ethereum.request({ method: 'eth_chainId' });
-    if (chainId != 97) {  // BSC testnet
+    if (chainId != 5) {
       await window.ethereum.request({
         method: 'wallet_switchEthereumChain',
-        params: [{ chainId: '0x61' }],
+        params: [{ chainId: '0x5' }],
       });
     }
 
     await window.ethereum.send('eth_requestAccounts');
     let provider = new ethers.providers.Web3Provider(window.ethereum, "any");// any needed to allow network changes
     document.getElementById("modalText").innerHTML = "Verifying the wallet...";
+
     isAddressKnown(provider).then(async resp => {
-        console.log("Inside the response: ", resp);
         if (resp == true) {
           document.getElementById("modalText").innerHTML = "Minting the NFT";
-          console.log("Continue with the minting procedure");
-          // const signer = this.provider.getSigner();
-          // const contract = new ethers.Contract("0x1585233e4B961f222653DFe642b81116bBb3AcD1", globalAbi, this.provider);
-          // const estimatedGas = await contract.connect(signer).estimateGas['mint']();
-          // const result = await contract.connect(signer)['mint']({
-          //   gasLimit: estimatedGas,
-          //   nonce: undefined,
-          // });
-          // console.log("Result: ", result);
-          // return result.wait();
+          const signer = provider.getSigner();
+          const contract = new ethers.Contract(nftContractAddress, nftAbi, provider);
+          const result = await contract.connect(signer)['mint']( id ,
+            {
+            value: 5000000000000000,
+            gasLimit: 10000000,
+            nonce: undefined,
+          });
 
+          try {
+            const ret = await result.wait()
+            console.log(ret);
+            document.getElementById("modalText").innerHTML = "NFT successfully minted";
+
+          } catch (error) {
+            console.error(error);
+            document.getElementById("modalText").innerHTML = "Minting unsuccessfull";
+          }
         }
         else {
           document.getElementById("modalText").innerHTML = "<p> It appears your metamask address is un-known<p>" +
             "<p> you will be redirected to Proofi for your registration </p>" ;
           await delay(2000);
-          //redirect to participate with the url of this page as redirectUrl
           window.open(`http://localhost:4200/accounts/participate?redirectUrl=${encodeURIComponent(window.location.href)}`,"_self")
         }
       }
@@ -65,11 +87,10 @@ permalink: "collection/nft-{{ nft.name }}.html"
   }
 
   async function isAddressKnown(provider) {
-    const contractAddress = '0xBA0E036B0Bf7D1C1aF169d4Cf9e49a06A8F3F01a';
+    const contractAddress = '0xbBA38836dca7173a4B66D24E48dd0993b0d9Bf17';
     const signer = provider.getSigner();
     const address = await signer.getAddress();
     const contract = new ethers.Contract(contractAddress, abi, provider);
-    //return contract.isKnown(address)
     return contract['isKnown'](address).then((resp) => {
       return resp;
     }).
@@ -90,6 +111,9 @@ permalink: "collection/nft-{{ nft.name }}.html"
 
   // When the user clicks the button, open the modal
   btn.onclick = function() {
+    if (!isAvailable) {
+      return;
+    }
     modal.style.display = "block";
     mint();
   }
@@ -100,27 +124,32 @@ permalink: "collection/nft-{{ nft.name }}.html"
   }
 
   // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function(event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
-    }
-  }
+  // window.onclick = function(event) {
+  //   if (event.target == modal) {
+  //     modal.style.display = "none";
+  //   }
+  // }
 </script>
 
 <div class="metaportal_fn_mintpage">
 
   <div class="container small">
 
+    <input type="hidden" id="hiddenVar"/>
+
     <!-- Mint Top -->
     <div class="metaportal_fn_mint_top">
-      <div class="mint_left">
-        <div class="img" id="nftImg">
-							<div class="img_in"  data-bg-img='https://ipfs.krazykobe.com/ipfs/QmdYSTJEnRyjMtuXpE2PeC9M2jA91UYigcmx49fguxQZUt/{{ nft.name}}.jpg'>
-                <div>
-                  <img src='https://ipfs.krazykobe.com/ipfs/QmdYSTJEnRyjMtuXpE2PeC9M2jA91UYigcmx49fguxQZUt/{{ nft.name }}.jpg' alt=''>
-                </div>
+      <div style="position: relative">
+        <div class="mint_left">
+          <div class="img" >
+            <div class="img_in" data-bg-img='https://ipfs.krazykobe.com/ipfs/QmdYSTJEnRyjMtuXpE2PeC9M2jA91UYigcmx49fguxQZUt/{{ nft.name}}.jpg'>
+              <div>
+                <img src='https://ipfs.krazykobe.com/ipfs/QmdYSTJEnRyjMtuXpE2PeC9M2jA91UYigcmx49fguxQZUt/{{ nft.name }}.jpg' alt=''>
               </div>
+            </div>
+          </div>
         </div>
+        <img class="mint_left" id="sold_out" src="https://ipfs.krazykobe.com/ipfs/QmYUqng7Ccmni7uTnumNF5v5wkQZA9w3CEuJfQQ2tSic8R/sold-out.png" alt="" hidden>
       </div>
       <div class="mint_right">
         <div class="metaportal_fn_share">
@@ -162,9 +191,6 @@ permalink: "collection/nft-{{ nft.name }}.html"
         </div>
 
         <div class="mint_desc">
-{#          <a class="metaportal_fn_button" id="mint">#}
-{#            <span>Mint Now</span>#}
-{#          </a>#}
           <p>By clicking “MINT NOW” button, you agree to our <a href="#">Terms of Service</a> and our <a href="#">Privacy Policy</a>.</p>
         </div>
       </div>

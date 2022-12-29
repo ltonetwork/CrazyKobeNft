@@ -3106,7 +3106,6 @@ a.metaportal_fn_videobutton:hover .fn__svg,
 .metaportal_fn_mint_top .mint_left:after{
 	content: '';
     position: absolute;
-    z-index: -1;
     width: 100%;
     height: 100%;
     color: var(--mc1);
@@ -6642,4 +6641,11 @@ a.metaportal_fn_videobutton:hover .fn__svg,
   color: #000;
   text-decoration: none;
   cursor: pointer;
+}
+
+#sold_out {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
 }
