@@ -19,17 +19,17 @@ permalink: "collection/nft-{{ nft.name }}.html"
   var isAvailable = true;
   const id = window.location.href.split('-').pop().split('.')[0];
 
-  if (window.ethereum) {
-    provider = new ethers.providers.Web3Provider(window.ethereum, "any");
-    let signer = provider.getSigner();
-    contract = new ethers.Contract(nftContractAddress, nftAbi, provider);
-    isAvailable = await contract.connect(signer)['isAvailable']('0x' + id);
-    let soldOut = document.getElementById("sold_out");
-    if (!isAvailable) {
-      soldOut.removeAttribute("hidden");
-      document.getElementById("myBtn").disabled = true;
-    }
-  }
+  // if (window.ethereum) {
+  //   provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+  //   let signer = provider.getSigner();
+  //   contract = new ethers.Contract(nftContractAddress, nftAbi, provider);
+  //   isAvailable = await contract.connect(signer)['isAvailable']('0x' + id);
+  //   let soldOut = document.getElementById("sold_out");
+  //   if (!isAvailable) {
+  //     soldOut.removeAttribute("hidden");
+  //     document.getElementById("myBtn").disabled = true;
+  //   }
+  // }
 
   async function mint() {
     if (!window.ethereum) {

@@ -7,11 +7,12 @@
     "price": 5000000000000000
   },
   "goerli": {
+    "baseURI": "ipfs://QmcwS5oSvusL4jyYMQTEKKAE5UcVdG7viRMRFqzmpyotYK/",
     "verification": {
       "identityProvider": "0xbBA38836dca7173a4B66D24E48dd0993b0d9Bf17",
       "token": "0x326C977E6efc84E512bB9C30f76E30c160eD06FB",
-      "oracle": "0xCC79157eb46F5624204f47AB42b3906cAA40eaB7",
-      "jobId": "0xc1c5e92880894eb6b27d3cae19670aa3",
+      "oracle": "0x188b71C9d27cDeE01B9b0dfF5C1aff62E8D6F434",
+      "jobId": "0x7599d3c8f31e4ce78ad2b790cbcfc673",
       "fee": 100000000000000000
     }
   }
