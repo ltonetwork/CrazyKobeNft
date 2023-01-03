@@ -83,7 +83,7 @@ contract(
             "Reserve",
             event => event.wallet === user1 && event.tokenId.toNumber() === tokenId
           );
-          assert.equal(false, await nft.isAvailable(tokenId));
+          assert.equal(2, await nft.isMinted(tokenId));
           assert.equal(user1, await nft.reservedFor(tokenId));
         });
 
@@ -103,14 +103,14 @@ contract(
         it("when token id too low", async () => {
           await truffleAssert.reverts(
             nft.mint(0, { from: user2, value: 100 }),
-            "token unavailable"
+            "Invalid token id"
           );
         });
 
         it("when token id too high", async () => {
           await truffleAssert.reverts(
             nft.mint(10000, { from: user2, value: 100 }),
-            "token unavailable"
+            "Invalid token id"
           );
         });
 
@@ -224,7 +224,7 @@ contract(
         });
 
         it("will make the token available again", async () => {
-          assert.equal(true, await nft.isAvailable(tokenId));
+          assert.equal(0, await nft.isMinted(tokenId));
         });
       });
     });
