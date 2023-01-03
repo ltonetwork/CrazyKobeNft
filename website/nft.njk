@@ -12,12 +12,14 @@ permalink: "collection/nft-{{ nft.name }}.html"
   import {abi as nftAbi} from "/js/nft-abi.js";
 
   document.getElementById("modalText").innerHTML = "Connecting to MetaMask...";
-  const nftContractAddress = "0x4A9F98f48Bf6fD8c74b87c4e88480E0Ff1B9Bc5f";
+  const nftContractAddress = "0x81649691d1ec1c168825E7fd5342DeA3d5A9A40A";
 
   let provider;
   let contract;
   var isAvailable = true;
-  const id = window.location.href.split('-').pop().split('.')[0];
+  //const id = window.location.href.split('-').pop().split('.')[0];
+  const id = parseInt(window.location.href.split('-').pop().split('.')[0]);
+
 
   // if (window.ethereum) {
   //   provider = new ethers.providers.Web3Provider(window.ethereum, "any");
