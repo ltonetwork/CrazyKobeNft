@@ -9,6 +9,8 @@ import "@proofi/solidity/contracts/Verification.sol";
 // This demo is an NFT that can only be minted by verified wallets.
 // Minted NFTs are initially reserved and unreserved on verification.
 contract NFT is ERC721, Ownable, Verification {
+    enum State { AVAILABLE, MINTED, RESERVED }
+
     string private baseURI;
 
     // Number of available tokens
@@ -42,7 +44,7 @@ contract NFT is ERC721, Ownable, Verification {
     // When a token is minted verify it using the IdentityProvider.
     // The token is reserved until verification is complete.
     function mint(uint256 id) public payable {
-        require(id > 0 && id <= maxTokens && isAvailable(id), "token unavailable");
+        require(isMinted(id) == State.AVAILABLE, "token unavailable");
         require(_allowedToMint(msg.sender) > 0, "mint limit reached for this wallet");
         require(!isDeclined(msg.sender), "wallet is declined");
         require(msg.value >= price, "insufficient payment");
@@ -53,6 +55,12 @@ contract NFT is ERC721, Ownable, Verification {
             verify(msg.sender);
             _reserve(msg.sender, id);
         }
+    }
+
+    function retryVerification() public payable {
+        require(!isApproved(msg.sender), "Wallet already approved");
+        require(!isDeclined(msg.sender) || msg.value >= price/10, "You have to pay a fee");
+        verify(msg.sender);
     }
 
     // Count the number of minted tokens per wallet, so we can limit
@@ -80,9 +88,14 @@ contract NFT is ERC721, Ownable, Verification {
         emit Reserve(owner, id);
     }
 
-    function isAvailable(uint256 id) public view returns (bool) {
-        return id > 0 && id <= maxTokens && !_exists(id) && reserved[id] == address(0);
+    function isMinted(uint256 id) public view returns (State) {
+        require(id > 0 && id <= maxTokens, "Invalid token id");
+
+        if (reserved[id] != address(0)) return State.RESERVED;
+        if (_exists(id)) return State.MINTED;
+        return State.AVAILABLE;
     }
+
 
     function reservedFor(uint256 id) external view returns (address) {
         return reserved[id];
@@ -140,5 +153,12 @@ contract NFT is ERC721, Ownable, Verification {
     // Change the price for minting an NFT
     function setPrice(uint256 _price) external onlyOwner {
         price = _price;
+    }
+
+    function withdraw() external onlyOwner {
+        uint256 balance = address(this).balance;
+        require(balance > 0, "Nothing to withdraw");
+        ( bool transfer, ) = payable(msg.sender).call{ value: balance, gas: 30_000 }(new bytes(0));
+        require(transfer, "Transfer failed");
     }
 }
