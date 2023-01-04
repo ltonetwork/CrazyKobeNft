@@ -394,12 +394,12 @@ export const abi = [
   {
     "inputs":[
       {
-        "internalType":"uint256",
-        "name":"id",
-        "type":"uint256"
+        "internalType":"address",
+        "name":"_addr",
+        "type":"address"
       }
     ],
-    "name":"isAvailable",
+    "name":"isDeclined",
     "outputs":[
       {
         "internalType":"bool",
@@ -413,17 +413,17 @@ export const abi = [
   {
     "inputs":[
       {
-        "internalType":"address",
-        "name":"_addr",
-        "type":"address"
+        "internalType":"uint256",
+        "name":"id",
+        "type":"uint256"
       }
     ],
-    "name":"isDeclined",
+    "name":"isMinted",
     "outputs":[
       {
-        "internalType":"bool",
+        "internalType":"enum NFT.State",
         "name":"",
-        "type":"bool"
+        "type":"uint8"
       }
     ],
     "stateMutability":"view",
@@ -585,6 +585,17 @@ export const abi = [
       }
     ],
     "stateMutability":"view",
+    "type":"function"
+  },
+  {
+    "inputs":[
+
+    ],
+    "name":"retryVerification",
+    "outputs":[
+
+    ],
+    "stateMutability":"payable",
     "type":"function"
   },
   {
@@ -814,6 +825,17 @@ export const abi = [
       }
     ],
     "name":"transferOwnership",
+    "outputs":[
+
+    ],
+    "stateMutability":"nonpayable",
+    "type":"function"
+  },
+  {
+    "inputs":[
+
+    ],
+    "name":"withdraw",
     "outputs":[
 
     ],

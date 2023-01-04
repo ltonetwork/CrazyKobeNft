@@ -16,22 +16,28 @@ permalink: "collection/nft-{{ nft.name }}.html"
 
   let provider;
   let contract;
-  var isAvailable = true;
+  var isMinted;
   //const id = window.location.href.split('-').pop().split('.')[0];
   const id = parseInt(window.location.href.split('-').pop().split('.')[0]);
 
 
-  // if (window.ethereum) {
-  //   provider = new ethers.providers.Web3Provider(window.ethereum, "any");
-  //   let signer = provider.getSigner();
-  //   contract = new ethers.Contract(nftContractAddress, nftAbi, provider);
-  //   isAvailable = await contract.connect(signer)['isAvailable']('0x' + id);
-  //   let soldOut = document.getElementById("sold_out");
-  //   if (!isAvailable) {
-  //     soldOut.removeAttribute("hidden");
-  //     document.getElementById("myBtn").disabled = true;
-  //   }
-  // }
+  if (window.ethereum) {
+    provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+    let signer = provider.getSigner();
+    contract = new ethers.Contract(nftContractAddress, nftAbi, provider);
+    isMinted = await contract.connect(signer)['isMinted']('0x' + id);
+    console.log("Is minted", isMinted);
+    if (isMinted === 1) {
+      let soldOut = document.getElementById("sold_out");
+      soldOut.removeAttribute("hidden");
+      document.getElementById("myBtn").disabled = true;
+    }
+    else if (isMinted === 2) {
+      let reserved = document.getElementById("reserved");
+      reserved.removeAttribute("hidden");
+      document.getElementById("myBtn").disabled = true;
+    }
+  }
 
   async function mint() {
     if (!window.ethereum) {
@@ -154,7 +160,9 @@ permalink: "collection/nft-{{ nft.name }}.html"
             </div>
           </div>
         </div>
-        <img class="mint_left" id="sold_out" src="https://ipfs.krazykobe.com/ipfs/QmYUqng7Ccmni7uTnumNF5v5wkQZA9w3CEuJfQQ2tSic8R/sold-out.png" alt="" hidden>
+{#        <img class="mint_left" id="sold_out" src="https://ipfs.krazykobe.com/ipfs/QmYUqng7Ccmni7uTnumNF5v5wkQZA9w3CEuJfQQ2tSic8R/sold-out.png" alt="" hidden>#}
+        <img class="mint_left" id="sold_out" src="/img/sold-out.png" alt="" hidden>
+        <img class="mint_left" id="reserved" src="/img/reserved.png" alt="" hidden>
       </div>
       <div class="mint_right">
         <div class="metaportal_fn_share">
