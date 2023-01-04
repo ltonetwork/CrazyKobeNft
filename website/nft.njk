@@ -55,21 +55,24 @@ permalink: "collection/nft-{{ nft.name }}.html"
           document.getElementById("modalText").innerHTML = "Minting the NFT";
           const signer = provider.getSigner();
           const contract = new ethers.Contract(nftContractAddress, nftAbi, provider);
-          const result = await contract.connect(signer)['mint']( id ,
-            {
-            value: 5000000000000000,
-            gasLimit: 10000000,
-            nonce: undefined,
-          });
-
           try {
-            const ret = await result.wait()
-            console.log(ret);
-            document.getElementById("modalText").innerHTML = "NFT successfully minted";
+            const result = await contract.connect(signer)['mint'](id,
+              {
+                value: 5000000000000000,
+                gasLimit: 10000000,
+                nonce: undefined,
+              })
+            try {
+              const ret = await result.wait()
+              console.log(ret);
+              document.getElementById("modalText").innerHTML = "NFT successfully minted";
 
+            } catch (error) {
+              console.error(error);
+              document.getElementById("modalText").innerHTML = "Minting unsuccessfull";
+            }
           } catch (error) {
-            console.error(error);
-            document.getElementById("modalText").innerHTML = "Minting unsuccessfull";
+            modal.style.display = "none";
           }
         }
         else {
