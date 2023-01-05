@@ -22,19 +22,17 @@ permalink: "collection/nft-{{ nft.name }}.html"
 
   if (window.ethereum) {
     provider = new ethers.providers.Web3Provider(window.ethereum, "any");
-    let signer = provider.getSigner();
+    await provider.send('eth_requestAccounts', []);
+    let signer = await provider.getSigner();
     contract = new ethers.Contract(nftContractAddress, nftAbi, provider);
     isMinted = await contract.connect(signer)['isMinted']('0x' + id);
-    console.log("Is minted", isMinted);
     if (isMinted === 1) {
       let soldOut = document.getElementById("sold_out");
       soldOut.removeAttribute("hidden");
-      document.getElementById("myBtn").disabled = true;
     }
     else if (isMinted === 2) {
       let reserved = document.getElementById("reserved");
       reserved.removeAttribute("hidden");
-      document.getElementById("myBtn").disabled = true;
     }
   }
 
@@ -69,8 +67,9 @@ permalink: "collection/nft-{{ nft.name }}.html"
               })
             try {
               const ret = await result.wait()
-              console.log(ret);
               document.getElementById("modalText").innerHTML = "NFT successfully minted";
+              let reserved = document.getElementById("reserved");
+              reserved.removeAttribute("hidden");
 
             } catch (error) {
               console.error(error);
@@ -121,7 +120,7 @@ permalink: "collection/nft-{{ nft.name }}.html"
 
   // When the user clicks the button, open the modal
   btn.onclick = function() {
-    if (!isAvailable) {
+    if (isMinted !== 0) {
       return;
     }
     modal.style.display = "block";
