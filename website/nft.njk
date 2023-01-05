@@ -68,6 +68,8 @@ permalink: "collection/nft-{{ nft.name }}.html"
             try {
               const ret = await result.wait()
               document.getElementById("modalText").innerHTML = "NFT successfully minted";
+              let reserved = document.getElementById("reserved");
+              reserved.removeAttribute("hidden");
 
             } catch (error) {
               console.error(error);
