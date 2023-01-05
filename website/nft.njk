@@ -26,7 +26,6 @@ permalink: "collection/nft-{{ nft.name }}.html"
     let signer = await provider.getSigner();
     contract = new ethers.Contract(nftContractAddress, nftAbi, provider);
     isMinted = await contract.connect(signer)['isMinted']('0x' + id);
-    console.log("Is minted", isMinted);
     if (isMinted === 1) {
       let soldOut = document.getElementById("sold_out");
       soldOut.removeAttribute("hidden");
@@ -68,7 +67,6 @@ permalink: "collection/nft-{{ nft.name }}.html"
               })
             try {
               const ret = await result.wait()
-              console.log(ret);
               document.getElementById("modalText").innerHTML = "NFT successfully minted";
 
             } catch (error) {
