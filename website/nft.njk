@@ -25,7 +25,7 @@ permalink: "collection/nft-{{ nft.name }}.html"
     await provider.send('eth_requestAccounts', []);
     let signer = await provider.getSigner();
     contract = new ethers.Contract(nftContractAddress, nftAbi, provider);
-    isMinted = await contract.connect(signer)['isMinted']('0x' + id);
+    isMinted = await contract.connect(signer)['isMinted'](id);
     if (isMinted === 1) {
       let soldOut = document.getElementById("sold_out");
       soldOut.removeAttribute("hidden");
