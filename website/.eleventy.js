@@ -7,6 +7,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("css");
   eleventyConfig.addPassthroughCopy("svg");
   eleventyConfig.addPassthroughCopy("js");
+  eleventyConfig.addPassthroughCopy("documents");
   eleventyConfig.addPassthroughCopy(
     {"node_modules/ethers/dist/ethers.esm.min.js" : "js/ethers.js"}
   );
