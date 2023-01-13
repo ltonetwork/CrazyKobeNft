@@ -6657,3 +6657,8 @@ a.metaportal_fn_videobutton:hover .fn__svg,
   left: 0;
   z-index: 5;
 }
+
+#terms{
+  padding-top: 15px;
+  font-size: 14px;
+}
