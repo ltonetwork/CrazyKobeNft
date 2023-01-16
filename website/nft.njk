@@ -21,6 +21,10 @@ permalink: "collection/nft-{{ nft.name }}.html"
 
 
   if (window.ethereum) {
+    await window.ethereum.request({
+      method: 'wallet_switchEthereumChain',
+      params: [{ chainId: '0x5' }],
+    });
     provider = new ethers.providers.Web3Provider(window.ethereum, "any");
     await provider.send('eth_requestAccounts', []);
     let signer = await provider.getSigner();
