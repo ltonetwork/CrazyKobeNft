@@ -15,5 +15,17 @@
       "jobId": "0xa75ebb6e5a7b492fbfb67ab240100a95",
       "fee": 100000000000000000
     }
+  },
+  "mainnet": {
+    "baseURI": "ipfs://QmXFnsyQsmJm4cPRKV25iE4vKvkicj67gnoJDpW9VrFPzn/",
+    "verification": {
+      "identityProvider": "0x11B42Ca67d52Ef145b5b84Ba042a1859C8aeb376",
+      "token": "0x514910771AF9Ca656af840dff83E8264EcF986CA",
+      "oracle": "0x188b71C9d27cDeE01B9b0dfF5C1aff62E8D6F434",
+      "jobId": "0xa75ebb6e5a7b492fbfb67ab240100a95",
+      "fee": 1360000000000000000
+    },
+    "maxTokens": 200,
+    "price": 10000000000000000
   }
 }
