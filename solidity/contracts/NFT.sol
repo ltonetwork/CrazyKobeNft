@@ -22,6 +22,9 @@ contract NFT is ERC721, Ownable, Verification {
     // Mint price in wei
     uint256 public price;
 
+    uint256 public totalMinted;
+
+
     // Emitted when `tokenId` token is reserved for `wallet` during mint
     event Reserve(address indexed wallet, uint256 indexed tokenId);
 
@@ -72,6 +75,7 @@ contract NFT is ERC721, Ownable, Verification {
     ) override internal virtual {
         if (from == address(0)) {
             mintedPerWallet[to] += 1;
+            totalMinted += 1;
         }
     }
 
