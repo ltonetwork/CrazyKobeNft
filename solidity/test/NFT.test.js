@@ -201,6 +201,10 @@ contract(
           assert.equal(0, await nft.reservedFor(secondTokenId));
         });
 
+        it("will set the total minted tokens to two", async() => {
+          assert.equal(2, await nft.totalMinted());
+        });
+
         it("will not unlock other tokens", async () => {
           assert.equal(user3, await nft.reservedFor(otherToken));
         });
