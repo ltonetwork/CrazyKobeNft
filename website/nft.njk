@@ -12,24 +12,25 @@ permalink: "collection/nft-{{ nft.name }}.html"
   import {abi as nftAbi} from "/js/nft-abi.js";
 
   document.getElementById("modalText").innerHTML = "Connecting to MetaMask...";
-  const nftContractAddress = "0x81649691d1ec1c168825E7fd5342DeA3d5A9A40A";
+  const nftContractAddress = '{{  contract }}';
 
   let provider;
   let contract;
   var isMinted;
+  let identityContractAddress;
   const id = window.location.href.split('-').pop().split('.')[0];
 
 
   if (window.ethereum) {
     await window.ethereum.request({
       method: 'wallet_switchEthereumChain',
-      params: [{ chainId: '0x5' }],
+      params: [{ chainId: '{{ network }}' }],
     });
     provider = new ethers.providers.Web3Provider(window.ethereum, "any");
     await provider.send('eth_requestAccounts', []);
     let signer = await provider.getSigner();
     contract = new ethers.Contract(nftContractAddress, nftAbi, provider);
-    isMinted = await contract.connect(signer)['isMinted'](id);
+    isMinted = await contract.connect(signer).isMinted(id);
     if (isMinted === 1) {
       let soldOut = document.getElementById("sold_out");
       soldOut.removeAttribute("hidden");
@@ -38,6 +39,7 @@ permalink: "collection/nft-{{ nft.name }}.html"
       let reserved = document.getElementById("reserved");
       reserved.removeAttribute("hidden");
     }
+    identityContractAddress = await contract.connect(signer).identityProvider();
   }
 
   async function mint() {
@@ -46,10 +48,10 @@ permalink: "collection/nft-{{ nft.name }}.html"
       return
     }
     const chainId = await window.ethereum.request({ method: 'eth_chainId' });
-    if (chainId != 5) {
+    if (chainId != {{ network }}) {
       await window.ethereum.request({
         method: 'wallet_switchEthereumChain',
-        params: [{ chainId: '0x5' }],
+        params: [{ chainId: '{{ network }}' }],
       });
     }
 
@@ -100,10 +102,9 @@ permalink: "collection/nft-{{ nft.name }}.html"
   }
 
   async function isAddressKnown(provider) {
-    const contractAddress = '0xbBA38836dca7173a4B66D24E48dd0993b0d9Bf17';
     const signer = provider.getSigner();
     const address = await signer.getAddress();
-    const contract = new ethers.Contract(contractAddress, abi, provider);
+    const contract = new ethers.Contract(identityContractAddress, abi, provider);
     return contract['isKnown'](address).then((resp) => {
       return resp;
     }).
