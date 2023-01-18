@@ -6662,3 +6662,13 @@ a.metaportal_fn_videobutton:hover .fn__svg,
   padding-top: 15px;
   font-size: 14px;
 }
+
+#continue {
+  margin-top: 1em;
+  color: #13c39a;
+  background: none;
+  border-radius: 0.5em;
+  padding: 1em;
+  border: 0.2em solid #13c39a;
+  font-size: 0.7em;
+}
