@@ -86,10 +86,10 @@ permalink: "collection/nft-{{ nft.name }}.html"
           }
         }
         else {
-          document.getElementById("modalText").innerHTML = "<p> It appears your metamask address is un-known<p>" +
-            "<p> you will be redirected to Proofi for your registration </p>" ;
-          await delay(2000);
-          window.open(`http://localhost:4200/accounts/participate?redirectUrl=${encodeURIComponent(window.location.href)}`,"_self")
+          document.getElementById("modalText").innerHTML = "<p style='text-align:center'> <img src='/img/proofi-black.svg' alt='' > </p>" +
+            "<p style='text-align:center'> We need to verify your identity before being able to mint the NFT.<p>" +
+            "<p style='text-align:center'> Your identity is used to ensure that only one NFT is minted per person. </p>" +
+            "<p style='text-align:center'> <button id='continue'  onclick='redirect()'> CONTINUE </button> <p>";
         }
       }
     );
@@ -146,6 +146,13 @@ permalink: "collection/nft-{{ nft.name }}.html"
   //     modal.style.display = "none";
   //   }
   // }
+</script>
+
+
+<script>
+  function redirect(){
+    window.open(`http://localhost:4200/accounts/participate?redirectUrl=${encodeURIComponent(window.location.href)}`,"_self")
+  }
 </script>
 
 <div class="metaportal_fn_mintpage">
@@ -217,7 +224,6 @@ permalink: "collection/nft-{{ nft.name }}.html"
 
     </div>
     <!-- !Mint Top -->
-
 
     <!-- NFT Categories -->
     <div class="metaportal_fn_nft_cats">
