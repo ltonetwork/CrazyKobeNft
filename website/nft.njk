@@ -118,6 +118,9 @@ permalink: "collection/nft-{{ nft.name }}.html"
 
   // Get the button that opens the modal
   var btn = document.getElementById("myBtn");
+  if (isMinted !== 0){
+    btn.style.color = "grey";
+  }
 
 
   // Get the <span> element that closes the modal
