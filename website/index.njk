@@ -2,6 +2,27 @@
 layout: layouts/base.njk
 ---
 
+<script type="module" async>
+  import {ethers} from "/js/ethers.js";
+  import {abi as nftAbi} from "/js/nft-abi.js";
+
+  const nftContractAddress = '{{  contract }}';
+
+  if (window.ethereum) {
+    await window.ethereum.request({
+      method: 'wallet_switchEthereumChain',
+      params: [{ chainId: '{{ network }}' }],
+    });
+    const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+    const contract = new ethers.Contract(nftContractAddress, nftAbi, provider);
+    const totalMinted = await contract.connect(provider).totalMinted();
+
+    document.getElementById("minted_counter").setAttribute("data-to", totalMinted);
+  }
+
+  window.dispatchEvent(new Event("init_counter"));
+</script>
+
 <!-- Home Section -->
 <section id="home">
   <div class="container">
@@ -119,10 +140,10 @@ layout: layouts/base.njk
           <div class="item">
             <h3 class="fn__gradient_title">
               <span class="prefix"></span>
-              <span class="fn_cs_counter" data-from="0" data-to="0" data-speed="3000" data-decimals="0">0</span>
+              <span id="minted_counter" class="fn_cs_counter" data-from="0" data-to="0" data-speed="3000" data-decimals="0">0</span>
               <span class="suffix"></span>
             </h3>
-            <p>Total Owners</p>
+            <p>Minted</p>
             <div class="divider"></div>
           </div>
         </li>
@@ -181,7 +202,7 @@ layout: layouts/base.njk
         <div class="desc">
           <p>Maltipoos are a popular designer breed of dog that are a cross between a Maltese and a Toy Poodle. They are small, playful, and affectionate, with a fluffy, curly coat and big, round eyes. Maltipoos are known for their intelligence and trainability, and they make great companion dogs for those who want a loyal and affectionate pet.</p>
 
-          <p>Maltipoos are small dogs, with a typical weight of between 4 and 10 pounds. They have a playful and energetic personality, and they need plenty of exercise and stimulation to stay happy and healthy. They are intelligent and highly trainable, and they can learn a variety of tricks and commands.</p>
+          <p>Maltipoos are small dogs, with a typical weight of between 2 and 5 kilograms. They have a playful and energetic personality, and they need plenty of exercise and stimulation to stay happy and healthy. They are intelligent and highly trainable, and they can learn a variety of tricks and commands.</p>
 
           <p>Maltipoos are very social animals and crave attention from their owners. They are very affectionate and form strong bonds with their owners, making them the perfect companion for those who want a loyal and loving pet. They are also good with children and other pets, provided they are properly socialized.</p>
 
@@ -189,15 +210,17 @@ layout: layouts/base.njk
 
           <p>In summary, Maltipoos are a designer breed of dog that are known for their intelligence, affection, and playful nature. They are the perfect pet for those who want a loyal and loving companion.</p>
 
-          <p style="font-style: italic">This text has been written by <a href="https://chat.openai.com/">ChatGPT</a> </p>
+          <p style="font-style: italic">This text has been written by <a href="https://chat.openai.com/" target="_blank">ChatGPT</a> </p>
           </div>
         <a href="https://discord.com/" class="metaportal_fn_button" target="_blank"><span>Learn more about Maltipoos</span></a>
       </div>
     </div>
   </div>
+</section>
   <!-- !About Shortcode -->
 
-
+<section>
+  <a id="how-to-mint" class="anchor"></a>
   <div class="container">
     <!-- Mint Shortcode -->
     <div class="fn_cs_mint">
@@ -265,12 +288,12 @@ layout: layouts/base.njk
         <!-- !Steps Shortcode -->
 
         <!-- Video Shortcode -->
-        <div class="fn_cs_video">
+        <!--div class="fn_cs_video">
           <img src="img/video/1.jpg" alt="">
           <a class="popup-youtube" href="https://www.youtube.com/watch?v=D1CDJEahhjY">
             <img src="/svg/play.svg" alt="" class="fn__svg">
           </a>
-        </div>
+        </div-->
         <!-- /Video Shortcode -->
 
       </div>

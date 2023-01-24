@@ -1,6 +1,5 @@
 const fs = require("fs");
 
-
 module.exports = function(eleventyConfig) {
   // Copy the `img` and `css` folders to the output
   eleventyConfig.addPassthroughCopy("img");
@@ -12,8 +11,11 @@ module.exports = function(eleventyConfig) {
     {"node_modules/ethers/dist/ethers.esm.min.js" : "js/ethers.js"}
   );
 
-  eleventyConfig.addGlobalData("contract", "0x81649691d1ec1c168825E7fd5342DeA3d5A9A40A");
+  eleventyConfig.addGlobalData("proofi", "http://localhost:4200");
+  eleventyConfig.addGlobalData("opensea", "https://testnets.opensea.io");
+  eleventyConfig.addGlobalData("contract", "0x61C13Bd0bFCF27F432e0D07cF4E02c8949E8Cb68");
   eleventyConfig.addGlobalData("network", "0x5");
+  eleventyConfig.addGlobalData("network_name", "goerli");
 
   // Get the first `n` elements of a collection.
   eleventyConfig.addFilter("head", (array, n) => {
@@ -27,6 +29,18 @@ module.exports = function(eleventyConfig) {
     return array.slice(0, n);
   });
 
+  // 404 page in dev mode
+  eleventyConfig.setBrowserSyncConfig({
+    callbacks: {
+      ready: function(err, bs) {
+        bs.addMiddleware("*", (req, res) => {
+          res.writeHead(404, { "Content-Type": "text/html; charset=UTF-8" });
+          res.write(fs.readFileSync("../_site/404.html"));
+          res.end();
+        });
+      }
+    }
+  });
 
   return {
     // Control which files Eleventy will process

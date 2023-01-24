@@ -5,6 +5,7 @@ pagination:
   size: 1
   alias: nft
 permalink: "collection/nft-{{ nft.name }}.html"
+title: "NFT {{ nft.name }}"
 ---
 <script type="module" async>
   import {ethers} from "/js/ethers.js";
@@ -16,7 +17,7 @@ permalink: "collection/nft-{{ nft.name }}.html"
 
   let provider;
   let contract;
-  var isMinted;
+  let isMinted;
   let identityContractAddress;
   const id = window.location.href.split('-').pop().split('.')[0];
 
@@ -117,14 +118,14 @@ permalink: "collection/nft-{{ nft.name }}.html"
   var modal = document.getElementById("myModal");
 
   // Get the button that opens the modal
-  var btn = document.getElementById("myBtn");
-  if (isMinted !== 0){
-    btn.style.color = "grey";
+  const btn = document.getElementById("myBtn");
+  if (isMinted === 0){
+    btn.classList.remove("disabled");
   }
 
 
   // Get the <span> element that closes the modal
-  var span = document.getElementsByClassName("close")[0];
+  const span = document.getElementsByClassName("close")[0];
 
   // When the user clicks the button, open the modal
   btn.onclick = function() {
@@ -150,8 +151,8 @@ permalink: "collection/nft-{{ nft.name }}.html"
 
 
 <script>
-  function redirect(){
-    window.open(`http://localhost:4200/accounts/participate?redirectUrl=${encodeURIComponent(window.location.href)}`,"_self")
+  function redirect() {
+    window.open(`{{ proofi }}/accounts/participate?redirectUrl=${encodeURIComponent(window.location.href)}`,"_self")
   }
 </script>
 
@@ -199,12 +200,12 @@ permalink: "collection/nft-{{ nft.name }}.html"
               <span>View On:</span>
             </li>
             <li>
-              <a href="https://opensea.io/" target="_blank"><img src="/svg/opensea.svg" alt="" class="fn__svg"></a>
+              <a href="{{ opensea }}/assets/{{ network_name }}/{{ contract }}/{{ nft.id }}" target="_blank"><img src="/svg/opensea.svg" alt="" class="fn__svg"></a>
             </li>
 
           </ul>
         </div>
-        <a  class="metaportal_fn_button" id="myBtn">Mint Now</a>
+        <a class="metaportal_fn_button disabled" id="myBtn">Mint Now</a>
 
         <!-- The Modal -->
         <div id="myModal" class="modal">
@@ -212,7 +213,7 @@ permalink: "collection/nft-{{ nft.name }}.html"
           <!-- Modal content -->
           <div class="modal-content">
             <span class="close">&times;</span>
-            <p id="modalText">Some text in the Modal..</p>
+            <p id="modalText"></p>
           </div>
 
         </div>

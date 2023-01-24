@@ -12,7 +12,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <title>Krazy Kobe | Home</title>
+  <title>Krazy Kobe {% if title %} | {{ title }}{% endif %}</title>
 
   <link rel="shortcut icon" href="https://ipfs.krazykobe.com/ipfs/QmdYSTJEnRyjMtuXpE2PeC9M2jA91UYigcmx49fguxQZUt/173.jpg" type="image/png" />
 
@@ -62,7 +62,7 @@
       <ul class="metaportal_fn_items">
         <li>
           <div class="item">
-            <a href="https://opensea.io/" target="_blank"></a>
+            <a href="{{ opensea }}/collection/krazy-kobe" target="_blank"></a>
             <span class="icon">
 							<img src="/img/market/opensea.png" alt="">
 						</span>
@@ -165,7 +165,7 @@
     <div class="mob_bot">
       <ul>
         <li><a class="creative_link" href="/#home">Home</a></li>
-        <li><a class="creative_link" href="/#about">About</a></li>
+        <li><a class="creative_link" href="/#how-to-mint">How to mint</a></li>
         <li><a class="creative_link" href="/collection">Collection</a></li>
         <li>
           <a href="#">
@@ -196,7 +196,7 @@
         <div class="nav">
           <ul>
             <li><a class="creative_link" href="/#home">Home</a></li>
-            <li><a class="creative_link" href="/#about">About</a></li>
+            <li><a class="creative_link" href="/#how-to-mint">How to mint</a></li>
             <li><a class="creative_link" href="/collection">Collection</a></li>
           </ul>
         </div>

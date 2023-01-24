@@ -28,7 +28,6 @@ var MetaPortalFilterCondition	= 'and';
 			FrenifyMetaPortal.totopFixer();
 			FrenifyMetaPortal.slider();
 			FrenifyMetaPortal.headerFixer();
-			FrenifyMetaPortal.fn_cs_counter();
 			FrenifyMetaPortal.video();
 			FrenifyMetaPortal.collection();
 			FrenifyMetaPortal.contactForm();
@@ -1191,9 +1190,13 @@ var MetaPortalFilterCondition	= 'and';
 		FrenifyMetaPortal.headerFixer();
 	});
 
-  	window.addEventListener("load", function(){
+  window.addEventListener("load", function(){
 		FrenifyMetaPortal.preloader();
 	});
+
+  window.addEventListener("init_counter", function () {
+    FrenifyMetaPortal.fn_cs_counter();
+  })
 
 })(jQuery);
 

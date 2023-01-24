@@ -37,6 +37,13 @@ html{
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
+a {
+  color: #ccc;
+}
+.anchor {
+  position: relative;
+  top: -150px;
+}
 .metaportal_fn_content{
 	display: -webkit-flex;
 	display: -moz-flex;
@@ -547,6 +554,7 @@ a.full_link{
 	background-color: transparent;
 	outline: none;
 	outline-color: transparent;
+  cursor: pointer;
 }
 .metaportal_fn_button span{
 	position: relative;
@@ -564,6 +572,12 @@ a.full_link{
 	width: 100%;
 	height: 80px;
 	line-height: 80px;
+}
+.metaportal_fn_button.disabled,
+.metaportal_fn_button.disabled:hover{
+  filter: grayscale(0.8);
+  color: #444;
+  cursor: default;
 }
 .metaportal_fn_protected .submit:hover:after,
 .metaportal_fn_button:hover:after{
@@ -1433,7 +1447,6 @@ a.full_link{
 
 
 
-
 .fn_cs_about{
 	position: relative;
 	display: -webkit-flex;
@@ -1441,7 +1454,6 @@ a.full_link{
 	display: -ms-flex;
 	display: -o-flex;
 	display: flex;
-	margin-bottom: 150px;
 }
 .fn_cs_about .left_part{
 	width: 57%;
