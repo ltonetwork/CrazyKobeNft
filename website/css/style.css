@@ -40,6 +40,10 @@ html{
 a {
   color: #ccc;
 }
+.anchor {
+  position: relative;
+  top: -150px;
+}
 .metaportal_fn_content{
 	display: -webkit-flex;
 	display: -moz-flex;
@@ -1443,7 +1447,6 @@ a.full_link{
 
 
 
-
 .fn_cs_about{
 	position: relative;
 	display: -webkit-flex;
@@ -1451,7 +1454,6 @@ a.full_link{
 	display: -ms-flex;
 	display: -o-flex;
 	display: flex;
-	margin-bottom: 150px;
 }
 .fn_cs_about .left_part{
 	width: 57%;
