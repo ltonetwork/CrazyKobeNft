@@ -1,6 +1,5 @@
 const fs = require("fs");
 
-
 module.exports = function(eleventyConfig) {
   // Copy the `img` and `css` folders to the output
   eleventyConfig.addPassthroughCopy("img");
@@ -30,6 +29,18 @@ module.exports = function(eleventyConfig) {
     return array.slice(0, n);
   });
 
+  // 404 page in dev mode
+  eleventyConfig.setBrowserSyncConfig({
+    callbacks: {
+      ready: function(err, bs) {
+        bs.addMiddleware("*", (req, res) => {
+          res.writeHead(404, { "Content-Type": "text/html; charset=UTF-8" });
+          res.write(fs.readFileSync("../_site/404.html"));
+          res.end();
+        });
+      }
+    }
+  });
 
   return {
     // Control which files Eleventy will process
