@@ -15,7 +15,7 @@ layout: layouts/base.njk
     });
     const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
     const contract = new ethers.Contract(nftContractAddress, nftAbi, provider);
-    const totalMinted = 10;//await contract.connect(provider).totalMinted();
+    const totalMinted = await contract.connect(provider).totalMinted();
 
     document.getElementById("minted_counter").setAttribute("data-to", totalMinted);
   }

@@ -13,7 +13,7 @@ module.exports = function(eleventyConfig) {
 
   eleventyConfig.addGlobalData("proofi", "http://localhost:4200");
   eleventyConfig.addGlobalData("opensea", "https://testnets.opensea.io");
-  eleventyConfig.addGlobalData("contract", "0x81649691d1ec1c168825E7fd5342DeA3d5A9A40A");
+  eleventyConfig.addGlobalData("contract", "0x61C13Bd0bFCF27F432e0D07cF4E02c8949E8Cb68");
   eleventyConfig.addGlobalData("network", "0x5");
   eleventyConfig.addGlobalData("network_name", "goerli");
 
