@@ -13,6 +13,7 @@ title: "NFT {{ nft.name }}"
   import {abi as nftAbi} from "/js/nft-abi.js";
 
   document.getElementById("modalText").innerHTML = "Connecting to MetaMask...";
+
   const nftContractAddress = '{{  contract }}';
 
   let provider;
@@ -82,17 +83,17 @@ title: "NFT {{ nft.name }}"
               document.getElementById("third_li").className = "progress";
               let reserved = document.getElementById("reserved");
               reserved.removeAttribute("hidden");
-              // let isminted = 2;
-              // while ( isminted !== 1){
-              //     isMinted = await contract.connect(signer).isMinted(id)
-              // }
-              let sold_out = document.getElementById("reserved");
+              while ( await contract.connect(signer).isMinted(id) !== 1){
 
+              }
+              let sold_out = document.getElementById("sold_out");
+              
+              const address = await signer.getAddress();
               reserved.setAttribute("hidden");
               sold_out.removeAttribute("hidden");
               document.getElementById("modalText").innerHTML = "Congratulations!! <br>" +
               "the NFT has been successfully minted! <br> " +
-              "You can see your NFT on <a href='{{ opensea }}/"+ signer +"'>Opensea <a>";
+              "You can see your NFT on <a href='{{ opensea }}/"+ address +"'>Opensea <a>";
               document.getElementById("third_li").className = "complete";
               document.getElementById("fourth_li").className = "complete";
             } catch (error) {
