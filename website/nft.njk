@@ -12,7 +12,7 @@ title: "NFT {{ nft.name }}"
   import {abi} from "/js/identity-contract.js";
   import {abi as nftAbi} from "/js/nft-abi.js";
 
-  document.getElementById("modalText").innerHTML = "Connecting to MetaMask...";
+  document.getElementById("modalText").innerHTML = "Sending transaction to MetaMask...";
   const nftContractAddress = '{{  contract }}';
 
   let provider;
@@ -62,6 +62,7 @@ title: "NFT {{ nft.name }}"
 
     isAddressKnown(provider).then(async resp => {
         if (resp == true) {
+          document.getElementById("confirmation").className = "complete";
           document.getElementById("modalText").innerHTML = "Minting the NFT";
           const signer = provider.getSigner();
           const contract = new ethers.Contract(nftContractAddress, nftAbi, provider);
@@ -133,7 +134,7 @@ title: "NFT {{ nft.name }}"
       return;
     }
     modal.style.display = "block";
-    mint();
+    // mint();
   }
 
   // When the user clicks on <span> (x), close the modal
@@ -213,7 +214,23 @@ title: "NFT {{ nft.name }}"
           <!-- Modal content -->
           <div class="modal-content">
             <span class="close">&times;</span>
-            <p id="modalText"></p>
+            <ol class="steps clearfix">
+              <li class="progress">
+                Send transaction
+              </li>
+              <li>
+                Waiting for confirmation
+              </li>
+              <li>
+                Verification by Proofi
+              </li>
+              <li>
+                NFT minted
+              </li>
+            </ol>
+            <div>
+              <p id="modalText"></p>
+            </div>
           </div>
 
         </div>
