@@ -12,7 +12,7 @@ title: "NFT {{ nft.name }}"
   import {abi} from "/js/identity-contract.js";
   import {abi as nftAbi} from "/js/nft-abi.js";
 
-  document.getElementById("modalText").innerHTML = "Sending transaction to MetaMask...";
+  document.getElementById("modalText").innerHTML = "Connecting to MetaMask...";
   const nftContractAddress = '{{  contract }}';
 
   let provider;
@@ -58,12 +58,11 @@ title: "NFT {{ nft.name }}"
 
     await window.ethereum.send('eth_requestAccounts');
     let provider = new ethers.providers.Web3Provider(window.ethereum, "any");// any needed to allow network changes
-    document.getElementById("modalText").innerHTML = "Verifying the wallet...";
+    //document.getElementById("modalText").innerHTML = "Verifying the wallet...";
 
     isAddressKnown(provider).then(async resp => {
         if (resp == true) {
-          document.getElementById("confirmation").className = "complete";
-          document.getElementById("modalText").innerHTML = "Minting the NFT";
+          //document.getElementById("modalText").innerHTML = "Minting the NFT";
           const signer = provider.getSigner();
           const contract = new ethers.Contract(nftContractAddress, nftAbi, provider);
           try {
@@ -74,13 +73,31 @@ title: "NFT {{ nft.name }}"
                 nonce: undefined,
               })
             try {
+              document.getElementById("modalText").innerHTML = "Awaiting on validators to pick up the transaction";
+              document.getElementById("first_li").className = "complete";
+              document.getElementById("second_li").className = "progress";
               const ret = await result.wait()
-              document.getElementById("modalText").innerHTML = "NFT successfully minted";
+              document.getElementById("modalText").innerHTML = "Proofi verification in pogress";
+              document.getElementById("second_li").className = "complete";
+              document.getElementById("third_li").className = "progress";
               let reserved = document.getElementById("reserved");
               reserved.removeAttribute("hidden");
+              // let isminted = 2;
+              // while ( isminted !== 1){
+              //     isMinted = await contract.connect(signer).isMinted(id)
+              // }
+              let sold_out = document.getElementById("reserved");
 
+              reserved.setAttribute("hidden");
+              sold_out.removeAttribute("hidden");
+              document.getElementById("modalText").innerHTML = "Congratulations!! <br>" +
+              "the NFT has been successfully minted! <br> " +
+              "You can see your NFT on <a href='{{ opensea }}/"+ signer +"'>Opensea <a>";
+              document.getElementById("third_li").className = "complete";
+              document.getElementById("fourth_li").className = "complete";
             } catch (error) {
               console.error(error);
+              document.getElementById("third_li").classList.remove("progress");
               document.getElementById("modalText").innerHTML = "Minting unsuccessfull";
             }
           } catch (error) {
@@ -134,7 +151,7 @@ title: "NFT {{ nft.name }}"
       return;
     }
     modal.style.display = "block";
-    // mint();
+    mint();
   }
 
   // When the user clicks on <span> (x), close the modal
@@ -215,16 +232,16 @@ title: "NFT {{ nft.name }}"
           <div class="modal-content">
             <span class="close">&times;</span>
             <ol class="steps clearfix">
-              <li class="progress">
+              <li id="first_li" class="progress">
                 Send transaction
               </li>
-              <li>
+              <li id="second_li">
                 Waiting for confirmation
               </li>
-              <li>
+              <li id="third_li">
                 Verification by Proofi
               </li>
-              <li>
+              <li id="fourth_li">
                 NFT minted
               </li>
             </ol>

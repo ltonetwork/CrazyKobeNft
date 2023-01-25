@@ -6759,3 +6759,6 @@ a.metaportal_fn_videobutton:hover .fn__svg,
   display: table;
 }
 
+#modalText {
+  text-align: center;
+}
