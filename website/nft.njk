@@ -65,11 +65,9 @@ title: "NFT {{ nft.name }}"
 
 
     if (isMinted === 1) {
-      // let soldOut = document.getElementById("sold_out");
       soldOut.removeAttribute("hidden");
     }
     else if (isMinted === 2) {
-      // let reserved = document.getElementById("reserved");
       reserved.removeAttribute("hidden");
     }
     identityContractAddress = await contract.connect(signer).identityProvider();
@@ -78,7 +76,6 @@ title: "NFT {{ nft.name }}"
 
     contract.on( 'Reserve' , (wallet, tokenId) => {
       if (parseInt(tokenId) !== parseInt(id)) return;
-      console.log("In the Reserve", tokenId);
       document.getElementById("modalText").innerHTML = "Proofi verification in pogress";
       document.getElementById("second_li").className = "complete";
       document.getElementById("third_li").className = "progress";
@@ -86,11 +83,9 @@ title: "NFT {{ nft.name }}"
     } );
 
     contract.on( 'Transfer' , (from, to, tokenId) => {
-      console.log("In the Transfer", tokenId, ":", id);
       if (parseInt(tokenId) !== parseInt(id)) return;
 
       reserved.hidden = true;
-      //reserved.setAttribute("hidden");
       soldOut.removeAttribute("hidden");
       document.getElementById("modalText").innerHTML = "Congratulations!! <br>" +
         "the NFT has been successfully minted! <br> " +
@@ -107,7 +102,6 @@ title: "NFT {{ nft.name }}"
     //   document.getElementById("modalText").innerHTML = "The user is not allowed to mint";
     // } );
 
-    console.log(document.referrer, ":", '{{ proofi }}');
     if (document.referrer === '{{ proofi }}'){
       openModal();
     }
@@ -184,32 +178,6 @@ title: "NFT {{ nft.name }}"
       return false;
     })
   }
-
-  // var modal = document.getElementById("myModal");
-  //
-  // // Get the button that opens the modal
-  // const btn = document.getElementById("myBtn");
-  // if (isMinted === 0){
-  //   btn.classList.remove("disabled");
-  // }
-  //
-  //
-  // // Get the <span> element that closes the modal
-  // const span = document.getElementsByClassName("close")[0];
-  //
-  // // When the user clicks the button, open the modal
-  // btn.onclick = function openModal() {
-  //   if (isMinted !== 0) {
-  //     return;
-  //   }
-  //   modal.style.display = "block";
-  //   mint();
-  // }
-  //
-  // // When the user clicks on <span> (x), close the modal
-  // span.onclick = function() {
-  //   modal.style.display = "none";
-  // }
 
 </script>
 
