@@ -28,6 +28,9 @@ contract NFT is ERC721, Ownable, Verification {
     // Emitted when `tokenId` token is reserved for `wallet` during mint
     event Reserve(address indexed wallet, uint256 indexed tokenId);
 
+    // Emitted when reservation on `tokenId` token is canceled instead of minted
+    event CancelReservation(address indexed wallet, uint256 indexed tokenId);
+
     constructor(
       string memory _name,
       string memory _symbol,
@@ -108,7 +111,13 @@ contract NFT is ERC721, Ownable, Verification {
     // Cancel a reservation that would otherwise be stuck
     function cancelReservation(uint256 id) public {
         address owner = reserved[id];
+        require(
+          msg.sender == owner || msg.sender == Ownable.owner(),
+          "Not allowed to cancel reservation for other wallet"
+        );
+
         delete reserved[id];
+        emit CancelReservation(owner, id);
 
         if (reservedForOwner[owner].length == 1) {
             if (reservedForOwner[owner][0] == id) {
@@ -141,7 +150,9 @@ contract NFT is ERC721, Ownable, Verification {
         for (uint256 i = 0; i < reservedForOwner[owner].length; i++) {
             uint256 id = reservedForOwner[owner][i];
             delete reserved[id];
+            emit CancelReservation(owner, id);
         }
+
         delete reservedForOwner[owner];
     }
 
