@@ -212,6 +212,7 @@ contract(
 
       describe("declined", () => {
         let requestId;
+        let result;
         const tokenId = 3;
 
         before(async () => {
@@ -220,11 +221,19 @@ contract(
         });
 
         it("fulfillVerification(requestId, false)", async () => {
-          await nft.fulfillVerification(requestId, false, { from: oracle });
+          result = await nft.fulfillVerification(requestId, false, { from: oracle });
         });
 
         it("will mark the address as declined", async () => {
           assert.equal(true, await nft.isDeclined(user2));
+        });
+
+        it("canceled the reservation", async () => {
+          truffleAssert.eventEmitted(
+            result,
+            "CancelReservation",
+            event => event.wallet === user2 && event.tokenId.toNumber() === tokenId
+          );
         });
 
         it("will make the token available again", async () => {
@@ -302,6 +311,51 @@ contract(
             "wallet is declined"
           );
         });
+      });
+    });
+
+    describe("cancel a stuck reservation", () => {
+      let nft;
+      const tokenId = 1;
+
+      before(async () => {
+        nft = await NFT.new("DMY", "Dummy", 10, 10, 100, {from: nftOwner});
+
+        await nft.setupVerification(
+          provider.address,
+          link.address,
+          oracle,
+          "0xc1c5e92880894eb6b27d3cae19670aa3",
+          web3.utils.toBN(100000000000000000),
+          {from: nftOwner}
+        )
+      });
+
+      before(async () => {
+        await nft.mint(tokenId, { from: user1, value: 100 });
+      });
+
+      it('will be reserved', async () => {
+        assert.equal(2, await nft.isMinted(tokenId));
+      });
+
+      it('will not allow another user to cancel', async () => {
+        await truffleAssert.reverts(
+          nft.cancelReservation(tokenId, { from: user2 }),
+          "Not allowed to cancel reservation for other wallet"
+        );
+      });
+
+      it("will allow the NFT owner to cancel", async () => {
+        const result = await nft.cancelReservation(tokenId, { from: user1 });
+
+        truffleAssert.eventEmitted(
+          result,
+          "CancelReservation",
+          event => event.wallet === user1 && event.tokenId.toNumber() === tokenId
+        );
+
+        assert.equal(0, await nft.isMinted(tokenId));
       });
     });
   }
