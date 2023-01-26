@@ -94,13 +94,13 @@ title: "NFT {{ nft.name }}"
       document.getElementById("fourth_li").className = "complete";
     } );
 
-    // contract.on('CancelReservation', (owner, tokenId) => {
-    // if (parseInt(tokenId) !== parseInt(id)) return;
-    //   reserved.hidden = true;
-    //   document.getElementById("third_li").className = "complete";
-    //   document.getElementById("fourth_li").classList.remove("progress");
-    //   document.getElementById("modalText").innerHTML = "The user is not allowed to mint";
-    // } );
+    contract.on( 'CancelReservation' , (wallet, tokenId) => {
+      if (parseInt(tokenId) !== parseInt(id)) return;
+      reserved.hidden = true;
+      document.getElementById("third_li").className = "complete";
+      document.getElementById("fourth_li").classList.remove("progress");
+      document.getElementById("modalText").innerHTML = "The user is not allowed to mint";
+    } );
 
     if (document.referrer === '{{ proofi }}'){
       openModal();
