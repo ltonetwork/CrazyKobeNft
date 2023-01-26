@@ -21,6 +21,7 @@ title: "NFT {{ nft.name }}"
   let isMinted;
   let identityContractAddress;
   const id = window.location.href.split('-').pop().split('.')[0];
+  let address = "";
 
 
   if (window.ethereum) {
@@ -33,15 +34,57 @@ title: "NFT {{ nft.name }}"
     let signer = await provider.getSigner();
     contract = new ethers.Contract(nftContractAddress, nftAbi, provider);
     isMinted = await contract.connect(signer).isMinted(id);
+    let soldOut = document.getElementById("sold_out");
+    let reserved = document.getElementById("reserved");
+
+
     if (isMinted === 1) {
-      let soldOut = document.getElementById("sold_out");
+      // let soldOut = document.getElementById("sold_out");
       soldOut.removeAttribute("hidden");
     }
     else if (isMinted === 2) {
-      let reserved = document.getElementById("reserved");
+      // let reserved = document.getElementById("reserved");
       reserved.removeAttribute("hidden");
     }
     identityContractAddress = await contract.connect(signer).identityProvider();
+    address = await signer.getAddress();
+
+
+    contract.on( 'Reserve' , (wallet, tokenId) => {
+      if (parseInt(tokenId) !== parseInt(id)) return;
+      console.log("In the Reserve", tokenId);
+      document.getElementById("modalText").innerHTML = "Proofi verification in pogress";
+      document.getElementById("second_li").className = "complete";
+      document.getElementById("third_li").className = "progress";
+      reserved.removeAttribute("hidden");
+    } );
+
+    contract.on( 'Transfer' , (from, to, tokenId) => {
+      console.log("In the Transfer", tokenId, ":", id);
+      if (parseInt(tokenId) !== parseInt(id)) return;
+
+      reserved.hidden = true;
+      //reserved.setAttribute("hidden");
+      soldOut.removeAttribute("hidden");
+      document.getElementById("modalText").innerHTML = "Congratulations!! <br>" +
+        "the NFT has been successfully minted! <br> " +
+        "You can see your NFT on <a href='{{ opensea }}/"+ address +"'>Opensea <a>";
+      document.getElementById("third_li").className = "complete";
+      document.getElementById("fourth_li").className = "complete";
+    } );
+
+    // contract.on('CancelReservation', (owner, tokenId) => {
+    // if (parseInt(tokenId) !== parseInt(id)) return;
+    //   reserved.hidden = true;
+    //   document.getElementById("third_li").className = "complete";
+    //   document.getElementById("fourth_li").classList.remove("progress");
+    //   document.getElementById("modalText").innerHTML = "The user is not allowed to mint";
+    // } );
+
+    console.log(document.referrer, ":", '{{ proofi }}');
+    if (document.referrer === '{{ proofi }}'){
+      openModal();
+    }
   }
 
   async function mint() {
@@ -59,7 +102,6 @@ title: "NFT {{ nft.name }}"
 
     await window.ethereum.send('eth_requestAccounts');
     let provider = new ethers.providers.Web3Provider(window.ethereum, "any");// any needed to allow network changes
-    //document.getElementById("modalText").innerHTML = "Verifying the wallet...";
 
     isAddressKnown(provider).then(async resp => {
         if (resp == true) {
@@ -78,26 +120,9 @@ title: "NFT {{ nft.name }}"
               document.getElementById("first_li").className = "complete";
               document.getElementById("second_li").className = "progress";
               const ret = await result.wait()
-              document.getElementById("modalText").innerHTML = "Proofi verification in pogress";
-              document.getElementById("second_li").className = "complete";
-              document.getElementById("third_li").className = "progress";
-              let reserved = document.getElementById("reserved");
-              reserved.removeAttribute("hidden");
-              while ( await contract.connect(signer).isMinted(id) !== 1){
-
-              }
-              let sold_out = document.getElementById("sold_out");
-              
-              const address = await signer.getAddress();
-              reserved.setAttribute("hidden");
-              sold_out.removeAttribute("hidden");
-              document.getElementById("modalText").innerHTML = "Congratulations!! <br>" +
-              "the NFT has been successfully minted! <br> " +
-              "You can see your NFT on <a href='{{ opensea }}/"+ address +"'>Opensea <a>";
-              document.getElementById("third_li").className = "complete";
-              document.getElementById("fourth_li").className = "complete";
             } catch (error) {
               console.error(error);
+              document.getElementById("second_li").className = "complete";
               document.getElementById("third_li").classList.remove("progress");
               document.getElementById("modalText").innerHTML = "Minting unsuccessfull";
             }
@@ -147,7 +172,7 @@ title: "NFT {{ nft.name }}"
   const span = document.getElementsByClassName("close")[0];
 
   // When the user clicks the button, open the modal
-  btn.onclick = function() {
+  btn.onclick = function openModal() {
     if (isMinted !== 0) {
       return;
     }
@@ -171,7 +196,7 @@ title: "NFT {{ nft.name }}"
 
 <script>
   function redirect() {
-    window.open(`{{ proofi }}/accounts/participate?redirectUrl=${encodeURIComponent(window.location.href)}`,"_self")
+    window.open(`{{ proofi }}accounts/participate?redirectUrl=${encodeURIComponent(window.location.href)}`,"_self")
   }
 </script>
 
