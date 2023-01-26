@@ -18,11 +18,37 @@ title: "NFT {{ nft.name }}"
 
   let provider;
   let contract;
-  let isMinted;
+  let isMinted = 0;
   let identityContractAddress;
   const id = window.location.href.split('-').pop().split('.')[0];
   let address = "";
 
+
+  var modal = document.getElementById("myModal");
+
+  // Get the button that opens the modal
+  const btn = document.getElementById("myBtn");
+  if (isMinted === 0){
+    btn.classList.remove("disabled");
+  }
+
+
+  // Get the <span> element that closes the modal
+  const span = document.getElementsByClassName("close")[0];
+
+  // When the user clicks the button, open the modal
+  btn.onclick = function openModal() {
+    if (isMinted !== 0) {
+      return;
+    }
+    modal.style.display = "block";
+    mint();
+  }
+
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
 
   if (window.ethereum) {
     await window.ethereum.request({
@@ -68,7 +94,7 @@ title: "NFT {{ nft.name }}"
       soldOut.removeAttribute("hidden");
       document.getElementById("modalText").innerHTML = "Congratulations!! <br>" +
         "the NFT has been successfully minted! <br> " +
-        "You can see your NFT on <a href='{{ opensea }}/"+ address +"'>Opensea <a>";
+        "You can see your NFT on <a href='{{ opensea }}/"+ address +"' target='_blank'>Opensea <a>";
       document.getElementById("third_li").className = "complete";
       document.getElementById("fourth_li").className = "complete";
     } );
@@ -159,38 +185,32 @@ title: "NFT {{ nft.name }}"
     })
   }
 
-  var modal = document.getElementById("myModal");
-
-  // Get the button that opens the modal
-  const btn = document.getElementById("myBtn");
-  if (isMinted === 0){
-    btn.classList.remove("disabled");
-  }
-
-
-  // Get the <span> element that closes the modal
-  const span = document.getElementsByClassName("close")[0];
-
-  // When the user clicks the button, open the modal
-  btn.onclick = function openModal() {
-    if (isMinted !== 0) {
-      return;
-    }
-    modal.style.display = "block";
-    mint();
-  }
-
-  // When the user clicks on <span> (x), close the modal
-  span.onclick = function() {
-    modal.style.display = "none";
-  }
-
-  // When the user clicks anywhere outside of the modal, close it
-  // window.onclick = function(event) {
-  //   if (event.target == modal) {
-  //     modal.style.display = "none";
-  //   }
+  // var modal = document.getElementById("myModal");
+  //
+  // // Get the button that opens the modal
+  // const btn = document.getElementById("myBtn");
+  // if (isMinted === 0){
+  //   btn.classList.remove("disabled");
   // }
+  //
+  //
+  // // Get the <span> element that closes the modal
+  // const span = document.getElementsByClassName("close")[0];
+  //
+  // // When the user clicks the button, open the modal
+  // btn.onclick = function openModal() {
+  //   if (isMinted !== 0) {
+  //     return;
+  //   }
+  //   modal.style.display = "block";
+  //   mint();
+  // }
+  //
+  // // When the user clicks on <span> (x), close the modal
+  // span.onclick = function() {
+  //   modal.style.display = "none";
+  // }
+
 </script>
 
 
