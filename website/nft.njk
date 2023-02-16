@@ -14,7 +14,14 @@ title: "NFT {{ nft.name }}"
 
   document.getElementById("modalText").innerHTML = "Connecting to MetaMask...";
 
-  const nftContractAddress = '{{  contract }}';
+  let nftContractAddress;
+  if(!getCookie("mode") || getCookie("mode") === 'mainnet') {
+    nftContractAddress = '{{  contract }}';
+  }
+  else {
+    nftContractAddress = '{{  contract_testnet }}';
+  }
+
 
   let provider;
   let contract;

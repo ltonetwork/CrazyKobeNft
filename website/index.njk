@@ -6,7 +6,13 @@ layout: layouts/base.njk
   import {ethers} from "/js/ethers.js";
   import {abi as nftAbi} from "/js/nft-abi.js";
 
-  const nftContractAddress = '{{  contract }}';
+  let nftContractAddress;
+  if(!getCookie("mode") || getCookie("mode") === 'mainnet') {
+    nftContractAddress = '{{  contract }}';
+  }
+  else {
+    nftContractAddress = '{{  contract_testnet }}';
+  }
 
   if (window.ethereum) {
     await window.ethereum.request({

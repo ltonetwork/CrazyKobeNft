@@ -2,12 +2,12 @@
   "default": {
     "name": "Krazy Kobe",
     "symbol": "KOBE",
-    "maxTokens": 10,
+    "maxTokens": 200,
     "maxPerWallet": 1,
     "price": 5000000000000000
   },
   "goerli": {
-    "baseURI": "ipfs://QmcwS5oSvusL4jyYMQTEKKAE5UcVdG7viRMRFqzmpyotYK/",
+    "baseURI": "ipfs://QmPE7anzBNF4FvVmWMb9vVd6oe42Nbf9f5Xbcv86BJW9BF/",
     "verification": {
       "identityProvider": "0xbBA38836dca7173a4B66D24E48dd0993b0d9Bf17",
       "token": "0x326C977E6efc84E512bB9C30f76E30c160eD06FB",
