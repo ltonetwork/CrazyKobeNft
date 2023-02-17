@@ -296,11 +296,11 @@
 
   if(!getCookie("mode") || getCookie("mode") === 'mainnet') {
     document.getElementById("cookie").innerText = "Switch to Testnet"
-    settings = getSettings("mainnet");
+    settings = {{ mainnet | dump | safe}};
   }
   else {
     document.getElementById("cookie").innerText = "Switch to Mainnet"
-    settings = getSettings("testnet");
+    settings = {{ testnet | dump | safe}};
   }
 
   var a = document.getElementById('myLink');
@@ -334,30 +334,6 @@
     }
     location.reload();
   }
-
-  function getSettings(mode) {
-    switch (mode) {
-      case "mainnet":
-        return {
-          opensea: '{{ mainnet.opensea }}',
-          opensea_collection: '{{ mainnet.opensea_collection }}',
-          contract: '{{ mainnet.contract }}',
-          network: '{{ mainnet.network }}',
-          network_name: '{{ mainnet.network_name }}',
-          proofi: '{{ mainnet.proofi }}'
-      }
-      case "testnet":
-        return {
-          opensea: '{{ testnet.opensea }}',
-          opensea_collection: '{{ testnet.opensea_collection }}',
-          contract: '{{ testnet.contract }}',
-          network: '{{ testnet.network }}',
-          network_name: '{{ testnet.network_name }}',
-          proofi: '{{ testnet.proofi }}'
-      }
-    }
-  }
-
 
 
 </script>

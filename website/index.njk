@@ -6,7 +6,6 @@ layout: layouts/base.njk
   import {ethers} from "/js/ethers.js";
   import {abi as nftAbi} from "/js/nft-abi.js";
 
-  const settings = getSettings(getCookie("mode") || "mainnet");
 
   if (window.ethereum) {
     await window.ethereum.request({

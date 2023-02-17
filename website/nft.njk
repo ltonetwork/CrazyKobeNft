@@ -14,9 +14,6 @@ title: "NFT {{ nft.name }}"
 
   document.getElementById("modalText").innerHTML = "Connecting to MetaMask...";
 
-  const settings = getSettings(getCookie("mode") || "mainnet");
-
-
   let provider;
   let contract;
   let isMinted = 0;
@@ -103,7 +100,7 @@ title: "NFT {{ nft.name }}"
       document.getElementById("modalText").innerHTML = "The user is not allowed to mint";
     } );
 
-    if (document.referrer === settings.proofi){
+    if (document.referrer === {{ proofi | dump | safe }}){
       openModal();
     }
   }
@@ -187,7 +184,7 @@ title: "NFT {{ nft.name }}"
 
 <script>
   function redirect() {
-    window.open(`${settings.network}accounts/participate?redirectUrl=${encodeURIComponent(window.location.href)}`,"_self")
+    window.open(`{{ proofi | safe }}accounts/participate?redirectUrl=${encodeURIComponent(window.location.href)}`,"_self")
   }
 
 </script>
