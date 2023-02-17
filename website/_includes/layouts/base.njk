@@ -62,7 +62,7 @@
       <ul class="metaportal_fn_items">
         <li>
           <div class="item">
-            <a href="{{ opensea }}/collection/krazy-kobe" target="_blank"></a>
+            <a id="myLink" target="_blank"></a>
             <span class="icon">
 							<img src="/img/market/opensea.png" alt="">
 						</span>
@@ -107,10 +107,6 @@
       <ul class="metaportal_fn_items">
         <li>
           <div class="item">
-{#              <a href="{{ opensea }}/collection/krazy-kobe" target="_blank"></a>#}
-{#              <span class="icon">#}
-{#							<img src="/img/market/opensea.png" alt="">#}
-{#						</span>#}
             <span class="text"><a class="my_switch" href="" onclick="switchNet()" id="cookie"></a></span>
           </div>
         </li>
@@ -296,12 +292,19 @@
 
 <script>
 
+  let settings;
+
   if(!getCookie("mode") || getCookie("mode") === 'mainnet') {
     document.getElementById("cookie").innerText = "Switch to Testnet"
+    settings = getSettings("mainnet");
   }
   else {
     document.getElementById("cookie").innerText = "Switch to Mainnet"
+    settings = getSettings("testnet");
   }
+
+  var a = document.getElementById('myLink');
+  a.href = settings.opensea + "/collection/" + settings.opensea_collection;
 
   function getCookie(name) {
     let nameEQ = name + "=";
@@ -331,6 +334,31 @@
     }
     location.reload();
   }
+
+  function getSettings(mode) {
+    switch (mode) {
+      case "mainnet":
+        return {
+          opensea: '{{ mainnet.opensea }}',
+          opensea_collection: '{{ mainnet.opensea_collection }}',
+          contract: '{{ mainnet.contract }}',
+          network: '{{ mainnet.network }}',
+          network_name: '{{ mainnet.network_name }}',
+          proofi: '{{ mainnet.proofi }}'
+      }
+      case "testnet":
+        return {
+          opensea: '{{ testnet.opensea }}',
+          opensea_collection: '{{ testnet.opensea_collection }}',
+          contract: '{{ testnet.contract }}',
+          network: '{{ testnet.network }}',
+          network_name: '{{ testnet.network_name }}',
+          proofi: '{{ testnet.proofi }}'
+      }
+    }
+  }
+
+
 
 </script>
 

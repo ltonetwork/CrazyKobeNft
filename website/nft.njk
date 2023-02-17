@@ -14,13 +14,7 @@ title: "NFT {{ nft.name }}"
 
   document.getElementById("modalText").innerHTML = "Connecting to MetaMask...";
 
-  let nftContractAddress;
-  if(!getCookie("mode") || getCookie("mode") === 'mainnet') {
-    nftContractAddress = '{{  contract }}';
-  }
-  else {
-    nftContractAddress = '{{  contract_testnet }}';
-  }
+  const settings = getSettings(getCookie("mode") || "mainnet");
 
 
   let provider;
@@ -60,12 +54,12 @@ title: "NFT {{ nft.name }}"
   if (window.ethereum) {
     await window.ethereum.request({
       method: 'wallet_switchEthereumChain',
-      params: [{ chainId: '{{ network }}' }],
+      params: [{ chainId: settings.network }],
     });
     provider = new ethers.providers.Web3Provider(window.ethereum, "any");
     await provider.send('eth_requestAccounts', []);
     let signer = await provider.getSigner();
-    contract = new ethers.Contract(nftContractAddress, nftAbi, provider);
+    contract = new ethers.Contract(settings.contract, nftAbi, provider);
     isMinted = await contract.connect(signer).isMinted(id);
     let soldOut = document.getElementById("sold_out");
     let reserved = document.getElementById("reserved");
@@ -96,7 +90,7 @@ title: "NFT {{ nft.name }}"
       soldOut.removeAttribute("hidden");
       document.getElementById("modalText").innerHTML = "Congratulations!! <br>" +
         "the NFT has been successfully minted! <br> " +
-        "You can see your NFT on <a href='{{ opensea }}/"+ address +"' target='_blank'>Opensea <a>";
+        "You can see your NFT on <a href='"+ settings.opensea+ "/"+ address +"' target='_blank'>Opensea <a>";
       document.getElementById("third_li").className = "complete";
       document.getElementById("fourth_li").className = "complete";
     } );
@@ -109,7 +103,7 @@ title: "NFT {{ nft.name }}"
       document.getElementById("modalText").innerHTML = "The user is not allowed to mint";
     } );
 
-    if (document.referrer === '{{ proofi }}'){
+    if (document.referrer === settings.proofi){
       openModal();
     }
   }
@@ -120,10 +114,10 @@ title: "NFT {{ nft.name }}"
       return
     }
     const chainId = await window.ethereum.request({ method: 'eth_chainId' });
-    if (chainId != {{ network }}) {
+    if (chainId != settings.network) {
       await window.ethereum.request({
         method: 'wallet_switchEthereumChain',
-        params: [{ chainId: '{{ network }}' }],
+        params: [{ chainId: settings.network }],
       });
     }
 
@@ -134,7 +128,7 @@ title: "NFT {{ nft.name }}"
         if (resp == true) {
           //document.getElementById("modalText").innerHTML = "Minting the NFT";
           const signer = provider.getSigner();
-          const contract = new ethers.Contract(nftContractAddress, nftAbi, provider);
+          const contract = new ethers.Contract(settings.contract, nftAbi, provider);
           try {
             const result = await contract.connect(signer)['mint'](id,
               {
@@ -186,13 +180,16 @@ title: "NFT {{ nft.name }}"
     })
   }
 
+  var a = document.getElementById('linkId');
+  a.href = settings.opensea + "/assets/" + settings.network_name +"/"+settings.contract +"/" + {{ nft.id }}
 </script>
 
 
 <script>
   function redirect() {
-    window.open(`{{ proofi }}accounts/participate?redirectUrl=${encodeURIComponent(window.location.href)}`,"_self")
+    window.open(`${settings.network}accounts/participate?redirectUrl=${encodeURIComponent(window.location.href)}`,"_self")
   }
+
 </script>
 
 <div class="metaportal_fn_mintpage">
@@ -239,8 +236,11 @@ title: "NFT {{ nft.name }}"
               <span>View On:</span>
             </li>
             <li>
-              <a href="{{ opensea }}/assets/{{ network_name }}/{{ contract }}/{{ nft.id }}" target="_blank"><img src="/svg/opensea.svg" alt="" class="fn__svg"></a>
+              <a id="linkId" target="_blank"><img src="/svg/opensea.svg" alt="" class="fn__svg"></a>
             </li>
+            <script>
+
+            </script>
 
           </ul>
         </div>
