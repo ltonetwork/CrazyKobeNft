@@ -6767,3 +6767,13 @@ a.metaportal_fn_videobutton:hover .fn__svg,
   text-align: center;
   margin-top: 10px;
 }
+li.testnet {
+  color: white;
+  background-color: red;
+  padding: 0 10px;
+  display: none;
+}
+body.testnet li.testnet{
+  display: inline;
+}
+

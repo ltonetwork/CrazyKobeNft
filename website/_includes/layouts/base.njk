@@ -173,6 +173,7 @@
 
         <div class="nav">
           <ul>
+            <li class="testnet hidden">Testnet</li>
             <li><a class="creative_link" href="/#home">Home</a></li>
             <li><a class="creative_link" href="/#how-to-mint">How to mint</a></li>
             <li><a class="creative_link" href="/collection">Collection</a></li>
@@ -263,11 +264,12 @@
   let settings;
 
   if(!getCookie("mode") || getCookie("mode") === 'mainnet') {
-    document.getElementById("cookie").innerText = "Switch to Testnet"
+    document.getElementById("cookie").innerText = "Switch to Testnet";
     settings = {{ mainnet | dump | safe}};
   }
   else {
-    document.getElementById("cookie").innerText = "Switch to Mainnet"
+    document.getElementById("cookie").innerText = "Switch to Mainnet";
+    document.body.classList.add("testnet");
     settings = {{ testnet | dump | safe}};
   }
 
