@@ -2,10 +2,23 @@ const fs = require("fs");
 
 module.exports = function(eleventyConfig) {
   eleventyConfig.addGlobalData("proofi", "http://localhost:4200/");
-  eleventyConfig.addGlobalData("opensea", "https://testnets.opensea.io");
-  eleventyConfig.addGlobalData("contract", "0xA7EE0572b72f43d39B7C863Ba9831A8291e8a9b4");
-  eleventyConfig.addGlobalData("network", "0x5");
-  eleventyConfig.addGlobalData("network_name", "goerli");
+  eleventyConfig.addGlobalData("mainnet", {
+    opensea: "https://opensea.io",
+    opensea_collection: "krazy-kobe",
+    contract: "0xA7EE0572b72f43d39B7C863Ba9831A8291e8a9b4",
+    network: "0x1",
+    network_name: "ethereum",
+    etherscan: "https://etherscan.io/"
+  });
+
+  eleventyConfig.addGlobalData("testnet", {
+    opensea: "https://testnets.opensea.io",
+    opensea_collection: "krazy-kobe-1",
+    contract: "0xA1f37b97B6aB00DF946Ba239d178cAf5aEd00FDa",
+    network: "0x5",
+    network_name: "goerli",
+    etherscan: "https://goerli.etherscan.io/"
+  });
 
   // Copy the `img` and `css` folders to the output
   eleventyConfig.addPassthroughCopy("img");

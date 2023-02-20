@@ -6762,3 +6762,22 @@ a.metaportal_fn_videobutton:hover .fn__svg,
 #modalText {
   text-align: center;
 }
+
+.my_switch {
+  color: #4c4c4c;
+  font-size: medium;
+}
+a.my_switch:link {
+  text-decoration: none;
+}
+
+li.testnet {
+  color: white;
+  background-color: red;
+  padding: 0 10px;
+  display: none;
+}
+body.testnet li.testnet{
+  display: inline;
+}
+

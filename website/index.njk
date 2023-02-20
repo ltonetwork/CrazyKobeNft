@@ -6,15 +6,14 @@ layout: layouts/base.njk
   import {ethers} from "/js/ethers.js";
   import {abi as nftAbi} from "/js/nft-abi.js";
 
-  const nftContractAddress = '{{  contract }}';
 
   if (window.ethereum) {
     await window.ethereum.request({
       method: 'wallet_switchEthereumChain',
-      params: [{ chainId: '{{ network }}' }],
+      params: [{ chainId: settings.network }],
     });
     const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
-    const contract = new ethers.Contract(nftContractAddress, nftAbi, provider);
+    const contract = new ethers.Contract(settings.contract, nftAbi, provider);
     const totalMinted = await contract.connect(provider).totalMinted();
 
     document.getElementById("minted_counter").setAttribute("data-to", totalMinted);
