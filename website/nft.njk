@@ -21,7 +21,6 @@ title: "NFT {{ nft.name }}"
   const id = window.location.href.split('-').pop().split('.')[0];
   let address = "";
 
-
   var modal = document.getElementById("myModal");
 
   // Get the button that opens the modal
@@ -139,10 +138,10 @@ title: "NFT {{ nft.name }}"
               document.getElementById("second_li").className = "progress";
               const ret = await result.wait()
             } catch (error) {
-              console.error(error);
+              // console.error(error);
               document.getElementById("second_li").className = "complete";
               document.getElementById("third_li").classList.remove("progress");
-              document.getElementById("modalText").innerHTML = "Minting unsuccessfull";
+              document.getElementById("modalText").innerHTML =`<div><p>Minting unsuccessfull</p> <p>Check <a href='${settings.etherscan}tx/${result.hash}' target='_blank'>Etherscan </a> for further information</p></div>`;
             }
           } catch (error) {
             modal.style.display = "none";

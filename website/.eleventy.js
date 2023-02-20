@@ -8,6 +8,7 @@ module.exports = function(eleventyConfig) {
     contract: "0xA7EE0572b72f43d39B7C863Ba9831A8291e8a9b4",
     network: "0x1",
     network_name: "ethereum",
+    etherscan: "https://etherscan.io/"
   });
 
   eleventyConfig.addGlobalData("testnet", {
@@ -16,6 +17,7 @@ module.exports = function(eleventyConfig) {
     contract: "0xA1f37b97B6aB00DF946Ba239d178cAf5aEd00FDa",
     network: "0x5",
     network_name: "goerli",
+    etherscan: "https://goerli.etherscan.io/"
   });
 
   // Copy the `img` and `css` folders to the output
