@@ -6764,9 +6764,13 @@ a.metaportal_fn_videobutton:hover .fn__svg,
 }
 
 .my_switch {
-  text-align: center;
-  margin-top: 10px;
+  color: grey;
+  font-size: medium;
 }
+a.my_switch:link {
+  text-decoration: none;
+}
+
 li.testnet {
   color: white;
   background-color: red;
