@@ -183,7 +183,7 @@ title: "NFT {{ nft.name }}"
 
 <script>
   function redirect() {
-    window.open(`{{ proofi | safe }}accounts/participate?redirectUrl=${encodeURIComponent(window.location.href)}`,"_self")
+    window.open(`{{ proofi | safe }}accounts/participate?redirectUrl=${encodeURIComponent(window.location.href)}&network=${networkCookie}`,"_self")
   }
 
 </script>
