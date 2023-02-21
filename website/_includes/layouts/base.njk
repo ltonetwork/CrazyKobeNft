@@ -255,8 +255,9 @@
 <script>
 
   let settings;
+  let networkCookie = getCookie("mode") || "mainnet";
 
-  if(!getCookie("mode") || getCookie("mode") === 'mainnet') {
+  if(networkCookie === 'mainnet') {
     document.getElementById("cookie").innerText = "Switch to Testnet";
     settings = {{ mainnet | dump | safe}};
   }
